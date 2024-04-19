@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, StatusBar } from 'react-native';
 import { useDispatch } from 'react-redux';
 import styles from '../style/splash.style';
-import KaburluLogo from '../../../assets/kaburlu_logo.svg';
+import KaburluLogo from '../../../assets/kaburlu_logo_white.svg';
 import { CONSTANTS } from '../../../constants';
 import { COLORS } from '../../../theme';
 

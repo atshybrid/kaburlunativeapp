@@ -5,7 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import {
     SplashScreen,
     HomeScreen,
-    DiscoveryScreen
+    DiscoveryScreen,
+    MobileLoginScreen,
+    MobileOTPScreen,
+    SetMPinScreen,
+    MPinLoginScreen,
+    LanguageScreen
 } from '../screens';
 import { COLORS } from '../theme';
 import { navigationRef } from '../navigators';
@@ -46,11 +51,36 @@ const AppNavigation = () => {
         <SafeAreaProvider>
             <NavigationContainer ref={navigationRef}>
                 <Stack.Navigator>
+                    {/* <Stack.Screen
+                        name={ROUTES.LANGUAGE}
+                        component={LanguageScreen}
+                        options={options}
+                    /> */}
                     <Stack.Screen
+                        name={ROUTES.MOBILE_LOGIN}
+                        component={MobileLoginScreen}
+                        options={options}
+                    />
+                    {/* <Stack.Screen
+                        name={ROUTES.MOBILE_OTP}
+                        component={MobileOTPScreen}
+                        options={options}
+                    /> */}
+                    {/* <Stack.Screen
+                        name={ROUTES.SET_MPIN}
+                        component={SetMPinScreen}
+                        options={options}
+                    /> */}
+                    {/* <Stack.Screen
+                        name={ROUTES.MPIN_LOGIN}
+                        component={MPinLoginScreen}
+                        options={options}
+                    /> */}
+                    {/* <Stack.Screen
                         name={ROUTES.HOME}
                         component={HomeScreen}
                         options={options}
-                    />
+                    /> */}
                     {/* <Stack.Screen
                         name={ROUTES.DISCOVERY}
                         component={DiscoveryScreen}

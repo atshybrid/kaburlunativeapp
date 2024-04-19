@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import styles from '../style/template.style';
-import { NewsItem } from '../../../constants';
-import { BottomContainer } from '../../BottomContainer';
-import { COLORS } from '../../../theme';
+import styles from './style/template.style';
+import { NewsItem } from '../../constants';
+import { COLORS } from '../../theme';
+import { TopContainer, BottomContainer } from '../common';
 
 type TemplateProps = {
     data: NewsItem;
@@ -14,6 +14,7 @@ export const ThirdTemplate = ({
 }: TemplateProps) => {
     return (
         <>
+            <TopContainer />
             <View style={styles.container}>
                 <View style={styles.txtContainer}>
                     <Text style={styles.categoryTxt}>{data.category}</Text>
