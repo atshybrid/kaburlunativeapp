@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { I18nextProvider } from 'react-i18next';
 import { store, persistor } from './store/store';
-import i18n from './helpers/i18n';
+import i18n from './i18n';
 import { AppNavigation } from './navigators';
 import { PersistGate } from 'redux-persist/integration/react';
 

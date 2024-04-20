@@ -1,12 +1,8 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './style/template.style';
-import { NewsItem } from '../../constants';
 import { TopContainer, BottomContainer } from '../common';
-
-type TemplateProps = {
-    data: NewsItem;
-};
+import { TemplateProps } from './types';
 
 export const FifthTemplate = ({
     data
@@ -21,8 +17,8 @@ export const FifthTemplate = ({
                         <Text style={[styles.titleTxt, { fontSize: 24 }]}>{data.title}</Text>
                     </View>
                     <Text style={styles.shortDescTxt}>{data.shortdesc}</Text>
-                    <Image source={data.img} style={styles.imgStyle} resizeMode='contain' />
                 </View>
+                <Image source={data.img} style={styles.imgStyle} resizeMode='contain' />
             </View>
             <BottomContainer data={data} />
         </>

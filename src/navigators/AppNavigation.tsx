@@ -10,10 +10,11 @@ import {
     MobileOTPScreen,
     SetMPinScreen,
     MPinLoginScreen,
-    LanguageScreen
+    LanguageScreen,
+    CommentScreen
 } from '../screens';
 import { COLORS } from '../theme';
-import { navigationRef } from '../navigators';
+import { TabNavigation, navigationRef } from '../navigators';
 import { ROUTES } from '../constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { RootState } from 'store';
@@ -56,11 +57,11 @@ const AppNavigation = () => {
                         component={LanguageScreen}
                         options={options}
                     /> */}
-                    <Stack.Screen
+                    {/* <Stack.Screen
                         name={ROUTES.MOBILE_LOGIN}
                         component={MobileLoginScreen}
                         options={options}
-                    />
+                    /> */}
                     {/* <Stack.Screen
                         name={ROUTES.MOBILE_OTP}
                         component={MobileOTPScreen}
@@ -76,11 +77,16 @@ const AppNavigation = () => {
                         component={MPinLoginScreen}
                         options={options}
                     /> */}
-                    {/* <Stack.Screen
+                    <Stack.Screen
                         name={ROUTES.HOME}
                         component={HomeScreen}
                         options={options}
-                    /> */}
+                    />
+                    <Stack.Screen
+                        name={ROUTES.COMMENT}
+                        component={CommentScreen}
+                        options={options}
+                    />
                     {/* <Stack.Screen
                         name={ROUTES.DISCOVERY}
                         component={DiscoveryScreen}

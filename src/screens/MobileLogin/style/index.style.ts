@@ -7,6 +7,23 @@ const styles = StyleSheet.create({
         padding: 32,
         backgroundColor: COLORS.white,
     },
+    modalView: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
+    modalContainer: {
+        padding: 32,
+        backgroundColor: COLORS.white,
+    },
+    modalItem: {
+        flexDirection: 'row',
+        paddingVertical: 10,
+        alignItems: 'center'
+    },
+    countryImg: {
+        width: 24,
+        height: 16
+    },
     welcomeTxt: {
         fontSize: 32,
         textAlign: 'center',
@@ -28,7 +45,7 @@ const styles = StyleSheet.create({
         marginTop: 8
     },
     countryInput: {
-        flex: 0.15,
+        flex: 0.2,
         height: 40,
         alignItems: 'center',
         justifyContent: 'center',
@@ -42,7 +59,7 @@ const styles = StyleSheet.create({
         color: COLORS.black,
     },
     mobileInput: {
-        flex: 0.85,
+        flex: 0.8,
         height: 40,
         backgroundColor: COLORS.lightwhite,
         fontFamily: FONTS.interRegular,

@@ -1,5 +1,6 @@
 export * from './Splash';
 export * from './HomeScreen';
+export * from './Comment';
 export * from './Discovery';
 export * from './MobileLogin';
 export * from './MobileOTP';
