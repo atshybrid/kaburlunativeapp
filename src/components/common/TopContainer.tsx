@@ -9,15 +9,15 @@ export const TopContainer = () => {
     return (
         <>
             <View style={styles.container}>
-                <Text style={styles.txtStyle}>సంపుటిక : 1</Text>
+                <Text style={styles.txtStyle}>{'సంపుటిక : 1'}</Text>
                 <View style={styles.divider} />
-                <Text style={styles.txtStyle}>సంచిక : 3</Text>
+                <Text style={styles.txtStyle}>{'సంచిక : 3'}</Text>
                 <View style={styles.divider} />
-                <Text style={styles.txtStyle}>కామారెడ్డి</Text>
+                <Text style={styles.txtStyle}>{'కామారెడ్డి'}</Text>
                 <View style={styles.divider} />
-                <Text style={styles.txtStyle}>గురువారం</Text>
+                <Text style={styles.txtStyle}>{'గురువారం'}</Text>
                 <View style={styles.divider} />
-                <Text style={styles.txtStyle}>9/11/2023</Text>
+                <Text style={styles.txtStyle}>{'9/11/2023'}</Text>
             </View>
         </>
     );

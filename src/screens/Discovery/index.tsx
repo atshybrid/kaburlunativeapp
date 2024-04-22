@@ -104,8 +104,8 @@ export function DiscoveryScreen() {
                         onPress={() => { }}>
                         <Text style={styles.guestTxt}>{t(`guest`)}</Text>
                         <Text style={styles.guestSubTxt}>
-                            <Text style={styles.clickHereTxt}>Click here </Text> to
-                            select Mobile Number
+                            <Text style={styles.clickHereTxt}>{'Click here '}</Text>{` to
+                            select Mobile Number`}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -123,39 +123,6 @@ export function DiscoveryScreen() {
                     keyExtractor={item => item.id.toString()}
                 />
             </View>
-            {/* <View
-        style={{
-          backgroundColor: '#fff',
-          paddingHorizontal: 16,
-        }}>
-        <SafeAreaView>
-          <FlatList
-            data={OptionList}
-            renderItem={item => renderItem(item)}
-            keyExtractor={item => item?.id}
-          />
-        </SafeAreaView>
-      </View>
-      <View style={styles.categoriesContainer}>
-        <Text style={styles.heading}>{t('categories')}</Text>
-        <View style={styles.wrapper}>
-          {[1, 2, 3, 4, 5, 6, 7].map((i, id) => (
-            <View
-              key={id}
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Image
-                source={require('../../../../assets/categoryImg.png')}
-                style={styles.iconImage}
-              />
-              <Text>ABC</Text>
-            </View>
-          ))}
-        </View>
-        <FlatList data={options} renderItem={item => renderBelowItem(item)} />
-      </View> */}
         </View>
     );
 }

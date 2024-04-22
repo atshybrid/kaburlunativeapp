@@ -11,7 +11,9 @@ import {
     SetMPinScreen,
     MPinLoginScreen,
     LanguageScreen,
-    CommentScreen
+    CommentScreen,
+    AddStaffScreen,
+    AddPostScreen
 } from '../screens';
 import { COLORS } from '../theme';
 import { TabNavigation, navigationRef } from '../navigators';
@@ -77,7 +79,17 @@ const AppNavigation = () => {
                         component={MPinLoginScreen}
                         options={options}
                     /> */}
+                    {/* <Stack.Screen
+                        name={ROUTES.ADD_STAFF}
+                        component={AddPostScreen}
+                        options={options}
+                    /> */}
                     <Stack.Screen
+                        name={ROUTES.ADD_STAFF}
+                        component={AddStaffScreen}
+                        options={options}
+                    />
+                    {/* <Stack.Screen
                         name={ROUTES.HOME}
                         component={HomeScreen}
                         options={options}
@@ -86,7 +98,7 @@ const AppNavigation = () => {
                         name={ROUTES.COMMENT}
                         component={CommentScreen}
                         options={options}
-                    />
+                    /> */}
                     {/* <Stack.Screen
                         name={ROUTES.DISCOVERY}
                         component={DiscoveryScreen}

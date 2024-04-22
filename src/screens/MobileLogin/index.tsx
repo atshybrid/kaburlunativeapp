@@ -84,8 +84,8 @@ export function MobileLoginScreen() {
             </Modal>
             <View style={{ flex: 1 }}>
                 <KaburluLogo />
-                <Text style={styles.welcomeTxt}>Welcome Back !</Text>
-                <Text style={styles.mobileTxt}>Enter your mobile number<Text style={styles.required}>{` *`}</Text></Text>
+                <Text style={styles.welcomeTxt}>{'Welcome Back !'}</Text>
+                <Text style={styles.mobileTxt}>{'Enter your mobile number'}<Text style={styles.required}>{` *`}</Text></Text>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity style={styles.countryInput} onPress={handleCountryInput} activeOpacity={0.9}>
                         <Text style={styles.countryTxt}>{`+${countryCode}`}</Text>
