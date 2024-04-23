@@ -13,6 +13,7 @@ export const ROUTES = {
 
     // 
     HOME: 'Home',
+    DASHBOARD: 'Dashboard',
     ADD_STAFF: 'AddStaff',
     COMMENT: 'Comment',
     DISCOVERY: 'Discovery',

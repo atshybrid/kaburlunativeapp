@@ -2,6 +2,7 @@ export * from './Splash';
 export * from './AddStaff';
 export * from './AddPost';
 export * from './HomeScreen';
+export * from './Dashboard';
 export * from './Comment';
 export * from './Discovery';
 export * from './MobileLogin';

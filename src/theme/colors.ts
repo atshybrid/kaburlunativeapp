@@ -10,5 +10,15 @@ export const COLORS = {
   white: '#FFFFFF',
   lightwhite: '#E5E5E5',
   black: '#000000',
-  lightblack: '#2A2929'
+  lightblack: '#2A2929',
+
+  // Dashboard
+  green: '#048812',
+  lightgreen: '#A0FFAA',
+  purple: '#9169FA',
+  lightpurple: '#EFEAFC',
+  tomato: '#F84C4C',
+  lighttomato: '#FFD7D7',
+  sky: '#4ABBF3',
+  lightsky: '#D9EFFA'
 };

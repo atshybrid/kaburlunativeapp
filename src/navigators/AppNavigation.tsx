@@ -13,10 +13,10 @@ import {
     LanguageScreen,
     CommentScreen,
     AddStaffScreen,
-    AddPostScreen
+    AddPostScreen,
+    DashboardScreen
 } from '../screens';
-import { COLORS } from '../theme';
-import { TabNavigation, navigationRef } from '../navigators';
+import { navigationRef } from '../navigators';
 import { ROUTES } from '../constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { RootState } from 'store';
@@ -29,21 +29,9 @@ const AppNavigation = () => {
     const loading = useSelector(
         (state: RootState): splashStateIF => state.splash,
     );
+
     const options = {
         headerShown: false,
-    };
-    const whiteHeaderBackOption = {
-        headerTitle: '',
-        headerStyle: {
-            backgroundColor: COLORS.lightwhite,
-            elevation: 0,
-            shadowOpacity: 0,
-        },
-    };
-    const blackHeaderBackOption = {
-        headerTitle: '',
-        headerStyle: { backgroundColor: COLORS.base, elevation: 0, shadowOpacity: 0 },
-        headerTintColor: COLORS.white,
     };
 
     if (loading.isActiveSplash) {
@@ -84,12 +72,17 @@ const AppNavigation = () => {
                         component={AddPostScreen}
                         options={options}
                     /> */}
-                    <Stack.Screen
+                    {/* <Stack.Screen
+                        name={ROUTES.DASHBOARD}
+                        component={DashboardScreen}
+                        options={options}
+                    /> */}
+                    {/* <Stack.Screen
                         name={ROUTES.ADD_STAFF}
                         component={AddStaffScreen}
                         options={options}
-                    />
-                    {/* <Stack.Screen
+                    /> */}
+                    <Stack.Screen
                         name={ROUTES.HOME}
                         component={HomeScreen}
                         options={options}
@@ -98,7 +91,7 @@ const AppNavigation = () => {
                         name={ROUTES.COMMENT}
                         component={CommentScreen}
                         options={options}
-                    /> */}
+                    />
                     {/* <Stack.Screen
                         name={ROUTES.DISCOVERY}
                         component={DiscoveryScreen}

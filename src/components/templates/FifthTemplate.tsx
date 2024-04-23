@@ -17,8 +17,8 @@ export const FifthTemplate = ({
                         <Text style={[styles.titleTxt, { fontSize: 24 }]}>{data.title}</Text>
                     </View>
                     <Text style={styles.shortDescTxt}>{data.shortdesc}</Text>
+                    <Image source={data.img} style={styles.imgStyle} resizeMode='contain' />
                 </View>
-                <Image source={data.img} style={styles.imgStyle} resizeMode='contain' />
             </View>
             <BottomContainer data={data} />
         </>
