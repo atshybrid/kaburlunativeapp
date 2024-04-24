@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './style/button.style';
+import { COLORS } from '../../theme';
 
 type ButtonProps = {
     onButtonPress: () => any;
@@ -23,7 +24,7 @@ export const Button = ({
     return (
         <>
             <TouchableOpacity
-                style={[styles.buttonViewStyle, containerStyle, disabled ? { opacity: 0.8 } : null]}
+                style={[styles.buttonViewStyle, { backgroundColor: disabled ? COLORS.grey : COLORS.base }, containerStyle]}
                 onPress={onButtonPress}
                 activeOpacity={0.8}
                 disabled={disabled}>

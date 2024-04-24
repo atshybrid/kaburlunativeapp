@@ -2,6 +2,7 @@ import { ImageSourcePropType } from 'react-native';
 
 export interface NewsItem {
     id: number;
+    type: string;
     category: string;
     title: string;
     subtitle: string;
@@ -16,6 +17,7 @@ export interface NewsItem {
 export const newsConst: NewsItem[] = [
     {
         id: 1,
+        type: 'template-1',
         category: 'వినోదం',
         title: 'ఒకేసారి మూడు రకాల సమస్యలు చుట్టుముట్టాయి',
         subtitle: 'సమంత',
@@ -28,6 +30,7 @@ export const newsConst: NewsItem[] = [
     },
     {
         id: 2,
+        type: 'template-2',
         category: 'రాజకీయం.',
         title: 'గజ్వేల్, కామారెడ్డిలో సీఎం కేసీఆర్',
         subtitle: 'నామినేషన్',
@@ -40,6 +43,7 @@ export const newsConst: NewsItem[] = [
     },
     {
         id: 3,
+        type: 'template-3',
         category: 'రాజకీయం.',
         title: 'కాంగ్రెసులోకి',
         subtitle: 'తీన్మార్ మల్లన్న',
@@ -53,6 +57,7 @@ export const newsConst: NewsItem[] = [
     },
     {
         id: 4,
+        type: 'template-4',
         category: 'రాజకీయం.',
         title: 'కేంద్రానికి వినతిలోనూ జాప్యమే !',
         subtitle: '',
@@ -65,6 +70,7 @@ export const newsConst: NewsItem[] = [
     },
     {
         id: 5,
+        type: 'template-5',
         category: 'రాజకీయం.',
         title: 'కేంద్రానికి వినతిలోనూ జాప్యమే !',
         subtitle: '',
@@ -75,4 +81,30 @@ export const newsConst: NewsItem[] = [
         dislike: 10,
         comment: 43
     },
+    {
+        id: 6,
+        type: 'recommend',
+        category: 'రాజకీయం.',
+        title: 'కేంద్రానికి వినతిలోనూ జాప్యమే !',
+        subtitle: '',
+        shortdesc:
+            'యావత్‌ రాష్ట్రాన్నీ దుర్భిక్షం పీడిస్తున్న సమయాన, కరువు మండలాల గుర్తింపే లోపభూయిష్టంకాగా, ప్రకటించిన మేరకైనా కేంద్రాన్ని సకాలంలో నిధులడిగే విషయంలో రాష్ట్ర ప్రభుత్వం తాత్సారం చేస్తోంది. కేంద్ర కరువు మాన్యువల్‌ ప్రకారం కరువును ప్రకటిస్తూ గెజిట్‌ విడుదల చేసిన వారంలో కేంద్రాన్ని సహాయం కోరుతూ రాష్ట్ర సర్కారు సమగ్ర విజ్ఞాపన పత్రం సమర్పించాలి.',
+        img: require('../assets/template_5.png'),
+        like: 230,
+        dislike: 10,
+        comment: 43
+    },
+    {
+        id: 7,
+        type: 'share-feed',
+        category: 'రాజకీయం.',
+        title: 'కేంద్రానికి వినతిలోనూ జాప్యమే !',
+        subtitle: '',
+        shortdesc:
+            'యావత్‌ రాష్ట్రాన్నీ దుర్భిక్షం పీడిస్తున్న సమయాన, కరువు మండలాల గుర్తింపే లోపభూయిష్టంకాగా, ప్రకటించిన మేరకైనా కేంద్రాన్ని సకాలంలో నిధులడిగే విషయంలో రాష్ట్ర ప్రభుత్వం తాత్సారం చేస్తోంది. కేంద్ర కరువు మాన్యువల్‌ ప్రకారం కరువును ప్రకటిస్తూ గెజిట్‌ విడుదల చేసిన వారంలో కేంద్రాన్ని సహాయం కోరుతూ రాష్ట్ర సర్కారు సమగ్ర విజ్ఞాపన పత్రం సమర్పించాలి.',
+        img: require('../assets/template_5.png'),
+        like: 230,
+        dislike: 10,
+        comment: 43
+    }
 ]

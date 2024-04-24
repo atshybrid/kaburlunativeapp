@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import styles from './style/index.style';
@@ -9,6 +9,9 @@ import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
 
 export function MPinLoginScreen() {
     const { t } = useTranslation();
+
+    const [mPin, setMPin] = useState('');
+
     return (
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
@@ -17,8 +20,10 @@ export function MPinLoginScreen() {
                 <Text style={styles.welcomeTxt}>{`Welcome Back${'\n'}XXXX`}</Text>
                 <Text style={styles.mPinEnterTxt}>{'Please Enter your MPIN'}</Text>
                 <SplitInput
+                    value={mPin}
                     length={4}
                     onComplete={(value) => {
+                        setMPin(value);
                         console.log(`Entered New MPIN: ${value}`);
                     }}
                 />
@@ -27,6 +32,7 @@ export function MPinLoginScreen() {
             <Button
                 buttonTitle="Get OTP"
                 onButtonPress={() => { }}
+                disabled={!mPin}
             />
         </View>
     );

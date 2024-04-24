@@ -1,17 +1,22 @@
 import React, { useState, useRef } from 'react';
 import { View, TextInput } from 'react-native';
 import styles from './style/split-input.style';
+import { COLORS } from '../../theme';
 
 type SplitInputProps = {
+    value: string
     length: number;
     onComplete: (value: string) => void;
 }
 
 export const SplitInput = ({
+    value,
     length,
     onComplete
 }: SplitInputProps) => {
-    const [inputs, setInputs] = useState<string[]>(Array(length).fill(''));
+    const stringToArray = value.split('').slice(0, length);
+
+    const [inputs, setInputs] = useState<string[]>(stringToArray);
     const inputRefs = Array.from({ length }, () => useRef<TextInput>(null));
 
     const handleChange = (value: string, index: number) => {
@@ -20,11 +25,10 @@ export const SplitInput = ({
 
         setInputs(newInputs);
 
+        onComplete(newInputs.join(''));
+
         if (value && index < length - 1) {
             inputRefs[index + 1].current?.focus();
-        } else if (index === length - 1 && value) {
-            // All inputs are filled, call the onComplete function
-            onComplete(newInputs.join(''));
         }
     };
 
@@ -41,6 +45,7 @@ export const SplitInput = ({
                     key={index}
                     ref={ref}
                     style={styles.input}
+                    cursorColor={COLORS.base}
                     maxLength={1}
                     keyboardType="numeric"
                     value={inputs[index]}

@@ -93,6 +93,7 @@ export function MobileLoginScreen() {
                     <TextInput
                         placeholder='Enter Mobile Number'
                         style={styles.mobileInput}
+                        cursorColor={COLORS.base}
                         value={phoneNumber}
                         onChangeText={handlePhoneNumber}
                         keyboardType="phone-pad"
@@ -103,6 +104,7 @@ export function MobileLoginScreen() {
             <Button
                 buttonTitle="Get OTP"
                 onButtonPress={() => { }}
+                disabled={!phoneNumber}
             />
         </View>
     );

@@ -68,7 +68,7 @@ const AppNavigation = () => {
                         options={options}
                     /> */}
                     {/* <Stack.Screen
-                        name={ROUTES.ADD_STAFF}
+                        name={ROUTES.ADD_POST}
                         component={AddPostScreen}
                         options={options}
                     /> */}

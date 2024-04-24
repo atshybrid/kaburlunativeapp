@@ -68,18 +68,26 @@ export function AddPostScreen() {
     // Render item for FlatList
     const renderModalItem = ({ item }: { item: Category }) => (
         <TouchableOpacity style={styles.modalItem} activeOpacity={1} onPress={() => handleCategoryChange(item.category)}>
-            <Text>{item.category}</Text>
+            <View style={styles.categoryImg}></View>
+            <Text style={styles.categoryTxt}>{item.category}</Text>
         </TouchableOpacity>
     );
 
     const renderCategoryModal = () => {
         return (
             <View style={styles.modalContainer}>
+                <View style={styles.categoryContainer}>
+                    <Text style={styles.categoryHeading}>{'Select Category'}</Text>
+                    <Icon name='close' size={24} color={COLORS.grey} onPress={handleCategoryModalClose} />
+                </View>
+                <Divider />
                 <FlatList
                     data={categoryData}
                     renderItem={renderModalItem}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.toString()}
+                    numColumns={4}
+                    horizontal={false}
                 />
             </View>
         );
@@ -154,7 +162,7 @@ export function AddPostScreen() {
                 <Text style={styles.categoryTitle}>{'Categories'}</Text>
                 <View style={styles.switchContainer}>
                     <Text style={styles.inputTitleTxt}>{'Selected Category'}</Text>
-                    <TouchableOpacity style={styles.inputTitleTxt} onPress={handleCategorySelect}><Text style={styles.categoryTxt}>{selectedCategory}</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.inputTitleTxt} onPress={handleCategorySelect}><Text style={styles.selectedCategoryTxt}>{selectedCategory}</Text></TouchableOpacity>
                 </View>
                 <View style={styles.switchContainer}>
                     <Text style={styles.inputTitleTxt}>{'Breaking News'}</Text>

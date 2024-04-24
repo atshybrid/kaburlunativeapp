@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import styles from './style/index.style';
@@ -9,6 +9,8 @@ import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
 
 export function MobileOTPScreen() {
     const { t } = useTranslation();
+
+    const [otp, setOtp] = useState('');
 
     const handleSubmit = () => {
         // const otpValue = otp.join('');
@@ -24,8 +26,10 @@ export function MobileOTPScreen() {
                     <Text style={styles.otpInfoTxt}>{'Enter the 4-digit code sent to your mobile number ending in XXXX'}</Text>
                 </View>
                 <SplitInput
+                    value={otp}
                     length={4}
                     onComplete={(value) => {
+                        setOtp(value);
                         console.log(`Entered OTP: ${value}`);
                     }}
                 />
@@ -34,6 +38,7 @@ export function MobileOTPScreen() {
             <Button
                 buttonTitle="Submit"
                 onButtonPress={handleSubmit}
+                disabled={!otp}
             />
         </View>
     );

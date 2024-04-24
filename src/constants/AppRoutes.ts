@@ -15,6 +15,7 @@ export const ROUTES = {
     HOME: 'Home',
     DASHBOARD: 'Dashboard',
     ADD_STAFF: 'AddStaff',
+    ADD_POST: 'AddPost',
     COMMENT: 'Comment',
     DISCOVERY: 'Discovery',
     LANGUAGE: 'Language'

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { View, StatusBar, Text, Switch, TouchableOpacity, ScrollView } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '../../theme';
 import { Button, Dropdown, Input } from '../../components';
 import styles from './style/index.style';
-import moment from 'moment';
+import { inputValidation } from '../../helpers';
 
 type Option = {
     label: string;
@@ -19,13 +20,29 @@ export function AddStaffScreen() {
     const [date, setDate] = useState<Date | null>(new Date());
     const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [number, setNumber] = useState('');
+    const [name, setName] = useState('Travis');
+    const [email, setEmail] = useState('travis.head@gmail.com');
+    const [number, setNumber] = useState('7896321452');
 
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const [isChildSwitchOn, setIsChildSwitchOn] = React.useState(false);
-    const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+    const [selectReporterType, setSelectReporterType] = useState<string | undefined>(undefined);
+    const [selectWorkArea, setSelectWorkArea] = useState<string | undefined>(undefined);
+    const [selectParentReporter, setSelectParentReporter] = useState<string | undefined>(undefined);
+    const [selectSubscriptionPlan, setSelectSubscriptionPlan] = useState<string | undefined>(undefined);
+
+    const allFieldsIsCorrect = (fields: boolean[]) => fields.every((filed) => filed);
+
+    const fieldsCorrect = allFieldsIsCorrect([
+        inputValidation.name(name),
+        inputValidation.email(email),
+        inputValidation.phone(number),
+        date != null,
+        selectReporterType != undefined,
+        selectWorkArea != undefined,
+        selectParentReporter != undefined,
+        selectSubscriptionPlan != undefined
+    ]);
 
     const options = [
         { label: 'Option 1', value: '1' },
@@ -45,13 +62,29 @@ export function AddStaffScreen() {
         setDate(currentDate);
     };
 
-    const handleSelect = (item: Option) => {
-        setSelectedOption(item.value);
+    const handleSelectReporterType = (item: Option) => {
+        setSelectReporterType(item.value);
+    };
+
+    const handleSelectWorkArea = (item: Option) => {
+        setSelectWorkArea(item.value);
+    };
+
+    const handleSelectParentReporter = (item: Option) => {
+        setSelectParentReporter(item.value);
+    };
+
+    const handleSelectSubscriptionPlan = (item: Option) => {
+        setSelectSubscriptionPlan(item.value);
     };
 
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
     const onToggleChildSwitch = () => setIsChildSwitchOn(!isChildSwitchOn);
+
+    const onButtonPress = () => {
+
+    }
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -76,8 +109,11 @@ export function AddStaffScreen() {
                         }}
                         value={name}
                         containerStyle={styles.textInput}
+                        maxLength={20}
+                        errorMessage={'Please enter a valid name'}
+                        valid={inputValidation.name(name)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Email'}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Email '}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e  shiva@gmail.com"
                         keyboardType='email-address'
@@ -86,6 +122,8 @@ export function AddStaffScreen() {
                         }}
                         value={email}
                         containerStyle={styles.textInput}
+                        errorMessage={'Please enter a valid email address'}
+                        valid={inputValidation.email(email)}
                     />
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Mobile Number '}<Text style={styles.required}>*</Text></Text>
                     <Input
@@ -97,6 +135,8 @@ export function AddStaffScreen() {
                         }}
                         value={number}
                         containerStyle={styles.textInput}
+                        errorMessage={'Please enter a valid 10 digit mobile number'}
+                        valid={inputValidation.phone(number)}
                     />
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Hire Date '}<Text style={styles.required}>*</Text></Text>
                     <TouchableOpacity
@@ -108,13 +148,13 @@ export function AddStaffScreen() {
                     </TouchableOpacity>
                     <Text style={styles.dateInfoTxt}>{'The first day of employment for this person.'}</Text>
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Reporter Type '}<Text style={styles.required}>*</Text></Text>
-                    <Dropdown label="Report" data={options} onSelect={handleSelect} />
+                    <Dropdown label="Report" data={options} onSelect={handleSelectReporterType} />
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Work Area '}<Text style={styles.required}>*</Text></Text>
-                    <Dropdown label="I.e 503101" data={options} onSelect={handleSelect} />
+                    <Dropdown label="I.e 503101" data={options} onSelect={handleSelectWorkArea} />
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Parent Reporter '}<Text style={styles.required}>*</Text></Text>
-                    <Dropdown label="I.e Bhiknoor" data={options} onSelect={handleSelect} />
+                    <Dropdown label="I.e Bhiknoor" data={options} onSelect={handleSelectParentReporter} />
                     <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Subscription Plan '}<Text style={styles.required}>*</Text></Text>
-                    <Dropdown label="I.e 1000 Rs Pay" data={options} onSelect={handleSelect} />
+                    <Dropdown label="I.e 1000 Rs Pay" data={options} onSelect={handleSelectSubscriptionPlan} />
                 </View>
                 <View style={styles.switchContainer}>
                     <Text style={styles.inputTitleTxt}>{'Article auto publish'}</Text>
@@ -136,9 +176,10 @@ export function AddStaffScreen() {
                 </View>
                 <Button
                     buttonTitle="Create Employee"
-                    onButtonPress={() => { }}
-                    buttonTextStyle={styles.btnTxt}
-                    containerStyle={styles.btnContainer}
+                    onButtonPress={onButtonPress}
+                    disabled={!fieldsCorrect}
+                    buttonTextStyle={[styles.btnTxt, { color: !fieldsCorrect ? COLORS.grey : COLORS.base }]}
+                    containerStyle={[styles.btnContainer, { borderColor: !fieldsCorrect ? COLORS.grey : COLORS.base }]}
                 />
             </View>
         </ScrollView>

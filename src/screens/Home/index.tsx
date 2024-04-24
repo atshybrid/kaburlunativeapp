@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import styles from './style/home.style';
 import { NewsItem, newsConst } from '../../constants';
-import { BottomTab } from '../../components';
+import { BottomTab, Recommend, ShareFeed, TopTab } from '../../components';
 import {
     FirstTemplate,
     SecondTemplate,
@@ -36,17 +36,21 @@ export function HomeScreen() {
     };
 
     const renderTemplate = (item: NewsItem) => {
-        switch (item.id) {
-            case 1:
+        switch (item.type) {
+            case 'template-1':
                 return <FirstTemplate data={item} />;
-            case 2:
+            case 'template-2':
                 return <SecondTemplate data={item} />;
-            case 3:
+            case 'template-3':
                 return <ThirdTemplate data={item} />;
-            case 4:
+            case 'template-4':
                 return <FourthTemplate data={item} />;
-            case 5:
+            case 'template-5':
                 return <FifthTemplate data={item} />;
+            case 'recommend':
+                return <Recommend />;
+            case 'share-feed':
+                return <ShareFeed />;
             default:
                 return null;
         }
@@ -55,6 +59,7 @@ export function HomeScreen() {
     return (
         <TapGestureHandler onHandlerStateChange={onTap}>
             <View style={styles.container}>
+                {isVisible && (<TopTab />)}
                 <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
                 <Carousel
                     style={{ flex: 1 }}

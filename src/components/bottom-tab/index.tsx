@@ -19,20 +19,20 @@ export const BottomTab = ({
 }: ButtonProps) => {
     return (
         <>
-            <View style={styles.tabBarContainer}>
-                <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={() => { }}>
+            <View style={styles.bottomTabBarContainer}>
+                <TouchableOpacity style={styles.bottomTabBarItem} activeOpacity={1} onPress={() => { }}>
                     <Icon name='menu' size={24} color={COLORS.grey} />
                     <Text>{'Menu'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={() => { }}>
+                <TouchableOpacity style={styles.bottomTabBarItem} activeOpacity={1} onPress={() => { }}>
                     <Icon name='search' size={24} color={COLORS.grey} />
                     <Text>{'Search'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={() => { }}>
+                <TouchableOpacity style={styles.bottomTabBarItem} activeOpacity={1} onPress={() => { }}>
                     <Icon name='visibility-off' size={24} color={COLORS.grey} />
                     <Text>{'Unread'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={() => { }}>
+                <TouchableOpacity style={styles.bottomTabBarItem} activeOpacity={1} onPress={() => { }}>
                     <Icon name='refresh' size={24} color={COLORS.grey} />
                     <Text>{'Reload'}</Text>
                 </TouchableOpacity>

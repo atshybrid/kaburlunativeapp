@@ -1,5 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS, FONTS } from '../../../theme';
+
+const { height, width } = Dimensions.get('screen')
+
+const itemWidth = (width) / 4;
 
 const styles = StyleSheet.create({
     container: {
@@ -12,11 +16,18 @@ const styles = StyleSheet.create({
         margin: 0,
     },
     modalContainer: {
-        padding: 32,
         backgroundColor: COLORS.white,
     },
     modalItem: {
-        paddingVertical: 10,
+        width: itemWidth,
+        paddingVertical: 16,
+        alignItems: 'center'
+    },
+    categoryContainer: {
+        padding: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     inputContainer: {
         backgroundColor: COLORS.white,
@@ -57,7 +68,23 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         marginLeft: 4
     },
+    categoryHeading: {
+        fontSize: 20,
+        fontFamily: FONTS.interBold,
+        color: COLORS.lightblack
+    },
+    categoryImg: {
+        height: 64,
+        width: 64,
+        borderRadius: 12,
+        backgroundColor: COLORS.lightwhite
+    },
     categoryTxt: {
+        fontSize: 10,
+        color: COLORS.grey,
+        fontFamily: FONTS.interSemiBold,
+    },
+    selectedCategoryTxt: {
         color: COLORS.base,
         fontFamily: FONTS.interMedium,
         fontSize: 12,
@@ -95,7 +122,7 @@ const styles = StyleSheet.create({
     btnTxt: {
         fontFamily: FONTS.interSemiBold,
         color: COLORS.base
-    }
+    },
 });
 
 export default styles;
