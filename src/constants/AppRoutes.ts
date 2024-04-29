@@ -18,5 +18,6 @@ export const ROUTES = {
     ADD_POST: 'AddPost',
     COMMENT: 'Comment',
     DISCOVERY: 'Discovery',
-    LANGUAGE: 'Language'
+    APP_LANGUAGE: 'AppLanguage',
+    CONTENT_LANGUAGE: 'ContentLanguage'
 };

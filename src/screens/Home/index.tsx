@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Carousel from 'react-native-snap-carousel';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import styles from './style/home.style';
 import { NewsItem, newsConst } from '../../constants';
 import { BottomTab, Recommend, ShareFeed, TopTab } from '../../components';
 import {
+    SwipeCard,
     FirstTemplate,
     SecondTemplate,
     ThirdTemplate,
     FourthTemplate,
     FifthTemplate
-} from '../../components/templates';
+} from '../../components';
 import { COLORS } from '../../theme';
 
 const { height, width } = Dimensions.get('screen')
@@ -21,6 +21,18 @@ export function HomeScreen() {
     const { t } = useTranslation();
 
     const [isVisible, setIsVisible] = useState<boolean>(true);
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!isModalVisible || !isVisible) {
+            const timer = setTimeout(() => {
+                setIsVisible(false);
+            }, 2000);
+            return () => clearTimeout(timer);
+        } else {
+            setIsVisible(true);
+        }
+    }, [isVisible, isModalVisible]);
 
     const onTap = (event: any) => {
         if (event.nativeEvent.state === State.END) {
@@ -28,9 +40,6 @@ export function HomeScreen() {
                 setIsVisible(false);
             } else {
                 setIsVisible(true);
-                setTimeout(() => {
-                    setIsVisible(false);
-                }, 2000);
             }
         }
     };
@@ -59,17 +68,13 @@ export function HomeScreen() {
     return (
         <TapGestureHandler onHandlerStateChange={onTap}>
             <View style={styles.container}>
-                {isVisible && (<TopTab />)}
-                <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
-                <Carousel
-                    style={{ flex: 1 }}
-                    scrollEnabled={true}
-                    data={newsConst}
-                    renderItem={({ item }) => renderTemplate(item)}
-                    sliderHeight={height - 48}
-                    itemHeight={height - 48}
-                    vertical={true}
+                <TopTab
+                    visible={isVisible}
+                    onOpenModal={() => setIsModalVisible(true)}
+                    onCloseModal={() => setIsModalVisible(false)}
                 />
+                <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
+                <SwipeCard data={newsConst} renderItem={renderTemplate} />
                 {isVisible && (<BottomTab />)}
             </View>
         </TapGestureHandler>

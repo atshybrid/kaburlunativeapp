@@ -6,8 +6,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { COLORS } from '../../theme';
 import styles from './style/index.style';
 import { Button, Input } from '../../components';
+import { ROUTES } from '../../constants';
 
-export function DashboardScreen() {
+interface NavigationProps {
+    navigation: any;
+    route: any;
+}
+
+export function DashboardScreen({ route, navigation }: NavigationProps) {
     const { t } = useTranslation();
 
     const [isKYCModalVisible, setKYCModalVisible] = useState(false);
@@ -27,12 +33,12 @@ export function DashboardScreen() {
         return (
             <View style={styles.modalContainer}>
                 <View style={styles.modalTopContainer}>
-                    <Text style={[styles.titleTxt, { color: COLORS.green }]}>{'KYC Verification'}</Text>
+                    <Text style={[styles.titleTxt, { color: COLORS.green }]}>{t('kyc_verification')}</Text>
                 </View>
                 <View style={styles.modalMainContainer}>
-                    <Text style={styles.titleTxt}>{'We need to verify you.'}</Text>
-                    <Text style={styles.subTitleTxt}>{'We need to confirm your identity. The reason for this is to fight fraud and keep the business secure'}</Text>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 16 }]}>{'Proof of identity'}</Text>
+                    <Text style={styles.titleTxt}>{t('need_to_verify')}</Text>
+                    <Text style={styles.subTitleTxt}>{t('identity_instruction')}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 16 }]}>{t('id_proof')}</Text>
                     <Input
                         placeholder="i.e Aadhar Number"
                         keyboardType='number-pad'
@@ -44,9 +50,9 @@ export function DashboardScreen() {
                         containerStyle={styles.textInput}
                     />
                     <TouchableOpacity activeOpacity={0.8} onPress={() => { }}>
-                        <Text style={styles.getOTPTxt}>{'GET OTP'}</Text>
+                        <Text style={styles.getOTPTxt}>{t('get_otp')}</Text>
                     </TouchableOpacity>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Verify OTP'}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{t('verify_otp')}</Text>
                     <Input
                         placeholder="i.e Enter OTP"
                         keyboardType='number-pad'
@@ -58,7 +64,7 @@ export function DashboardScreen() {
                         containerStyle={styles.textInput}
                     />
                     <Button
-                        buttonTitle="Verify"
+                        buttonTitle={t('verify')}
                         onButtonPress={() => { }}
                         buttonTextStyle={styles.btnTxt}
                         containerStyle={styles.btnContainer}
@@ -91,35 +97,35 @@ export function DashboardScreen() {
                 </View>
                 <Icon name='settings-outline' size={24} color={COLORS.grey} />
             </View>
-            <View style={styles.articleTopContainer}>
+            <TouchableOpacity style={styles.articleTopContainer} activeOpacity={1} onPress={() => { navigation.navigate(ROUTES.ADD_POST); }}>
                 <Icon name='newspaper-outline' size={24} color={COLORS.sky} />
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.articleTitle}>{'Post Articles'}</Text>
-                    <Text style={styles.articleSubTitle}>{'You can post a new article by clicking here'}</Text>
+                    <Text style={styles.articleTitle}>{t('post_articles')}</Text>
+                    <Text style={styles.articleSubTitle}>{t('post_instruction')}</Text>
                 </View>
                 <Icon name='chevron-forward' size={24} color={COLORS.sky} />
-            </View>
+            </TouchableOpacity>
             <View style={styles.articleBottomContainer}>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lightgreen }]}>
                     <View style={styles.articleItemContainer}>
                         <Icon name='newspaper-outline' size={24} color={COLORS.green} />
                         <Text style={[styles.totalArticle, { color: COLORS.green }]}>{'8'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{'Published'}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{t('published')}</Text>
                 </View>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lightpurple }]}>
                     <View style={styles.articleItemContainer}>
                         <Icon name='newspaper-outline' size={24} color={COLORS.purple} />
                         <Text style={[styles.totalArticle, { color: COLORS.purple }]}>{'10'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{'Submitted'}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{t('submitted')}</Text>
                 </View>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lighttomato }]}>
                     <View style={styles.articleItemContainer}>
                         <Icon name='newspaper-outline' size={24} color={COLORS.tomato} />
                         <Text style={[styles.totalArticle, { color: COLORS.tomato }]}>{'2'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 8 }]}>{'Rejected'}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: 8 }]}>{t('rejected')}</Text>
                 </View>
             </View>
         </View>

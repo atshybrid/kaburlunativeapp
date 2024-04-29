@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         width: 64,
         height: 45,
         fontFamily: FONTS.interRegular,
+        color: COLORS.black,
         borderBottomColor: COLORS.grey,
         borderBottomWidth: 1,
         textAlign: 'center',

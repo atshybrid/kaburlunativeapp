@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         width: width,
-        paddingVertical: 16,
+        paddingVertical: 8,
         zIndex: 1,
         backgroundColor: COLORS.white,
         borderBottomWidth: 1,
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     tabBarItem: {
         flexDirection: 'row',
         alignItems: 'center',
+        padding: 8,
     },
     tabBarTxt: {
         color: COLORS.grey,

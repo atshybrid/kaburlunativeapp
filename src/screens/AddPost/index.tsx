@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, StatusBar, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useState, useEffect } from 'react';
+import { View, StatusBar, Text, TouchableOpacity, FlatList, ScrollView, PermissionsAndroid } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
+import Voice from '@react-native-voice/voice';
 import { COLORS } from '../../theme';
 import { Button, Input } from '../../components';
 import styles from './style/index.style';
@@ -43,14 +44,97 @@ export function AddPostScreen() {
         }
     ]
 
+    const [language, setLanguage] = useState('te-IN');
+    const [permissionGranted, setPermissionGranted] = useState(false);
+
     const [title, setTitle] = React.useState('');
     const [shortTitle, setShortTitle] = React.useState('');
     const [longTitle, setLongTitle] = React.useState('');
+
+    const [selectedLanguageSwitch, setSelectedLanguageSwitch] = React.useState<string | null>(null);
+    const [selectedIcon, setSelectedIcon] = React.useState<string | null>(null);
+
     const [isBreakingNewsOn, setIsBreakingNewsOn] = React.useState(false);
     const [isCategoryModalVisible, setCategoryModalVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(categoryData[0].category);
 
-    const onToggleChildSwitch = () => setIsBreakingNewsOn(!isBreakingNewsOn);
+    useEffect(() => {
+        checkPermission();
+        Voice.onSpeechResults = onSpeechResults;
+        return () => {
+            Voice.destroy().then(Voice.removeAllListeners);
+        };
+    }, []);
+
+    const checkPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+                {
+                    title: "Speech to Text App Permission",
+                    message: "This app needs access to your microphone to enable speech recognition.",
+                    buttonPositive: "OK",
+                }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("Microphone permission granted");
+                setPermissionGranted(true);
+            } else {
+                console.log("Microphone permission denied");
+                setPermissionGranted(false);
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    const startListening = async (inputType: string) => {
+        if (!permissionGranted) {
+            console.log("Permission not granted!");
+            return;
+        }
+        try {
+            console.log("Language ==>", language);
+            await Voice.start(language);
+            Voice.onSpeechResults = onSpeechResults;
+            console.log("startListening ==>", inputType);
+            setSelectedIcon(inputType === selectedIcon ? null : inputType);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const stopListening = async (inputType: string) => {
+        try {
+            await Voice.stop();
+            Voice.removeAllListeners();
+            console.log("stopListening ==>", inputType);
+            setSelectedIcon(inputType === selectedIcon ? null : inputType);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const onSpeechResults = (event: any) => {
+        if (selectedIcon === 'title') {
+            setTitle(event.value[0]);
+        } else if (selectedIcon === 'shortTitle') {
+            setShortTitle(event.value[0]);
+        } else if (selectedIcon === 'longTitle') {
+            setLongTitle(event.value[0]);
+        }
+    };
+
+    const onToggleLanguageSwitch = (inputType: string) => {
+        if (language === 'en-US') {
+            setLanguage('te-IN'); // Switch to Telugu
+        } else {
+            setLanguage('en-US'); // Switch to English
+        }
+        setSelectedLanguageSwitch(inputType === selectedLanguageSwitch ? null : inputType);
+    };
+
+    const onToggleSwitch = () => setIsBreakingNewsOn(!isBreakingNewsOn);
 
     const handleCategorySelect = () => {
         setCategoryModalVisible(true);
@@ -77,7 +161,7 @@ export function AddPostScreen() {
         return (
             <View style={styles.modalContainer}>
                 <View style={styles.categoryContainer}>
-                    <Text style={styles.categoryHeading}>{'Select Category'}</Text>
+                    <Text style={styles.categoryHeading}>{t('select_category')}</Text>
                     <Icon name='close' size={24} color={COLORS.grey} onPress={handleCategoryModalClose} />
                 </View>
                 <Divider />
@@ -89,6 +173,41 @@ export function AddPostScreen() {
                     numColumns={4}
                     horizontal={false}
                 />
+            </View>
+        );
+    };
+
+    const speechToTextIcon = (inputType: string) => {
+        return (
+            <Icon
+                name={inputType === selectedIcon ? 'record-rec' : 'microphone'}
+                size={inputType === selectedIcon ? 24 : 22} color={COLORS.grey}
+                onPress={() => {
+                    if (inputType === selectedIcon) {
+                        stopListening(inputType)
+                    } else {
+                        startListening(inputType)
+                    }
+                }}
+            />
+        );
+    }
+
+    const languageSwitch = (inputType: string) => {
+        return (
+            <View style={styles.languageContainer}>
+                {speechToTextIcon(inputType)}
+                <TouchableOpacity
+                    style={[styles.languageSwitchOutter, { justifyContent: inputType === selectedLanguageSwitch ? 'flex-end' : 'flex-start' }]}
+                    activeOpacity={1}
+                    onPress={() => onToggleLanguageSwitch(inputType)}>
+                    {inputType === selectedLanguageSwitch && (<Text style={styles.langTxt}>{'అ'}</Text>)}
+                    <View style={styles.languageSwitchInner}>
+
+                        <Text style={styles.langTxt}>{inputType === selectedLanguageSwitch ? 'Aa' : 'అ'}</Text>
+                    </View>
+                    {inputType !== selectedLanguageSwitch && (<Text style={styles.langTxt}>{'Aa'}</Text>)}
+                </TouchableOpacity>
             </View>
         );
     };
@@ -107,12 +226,12 @@ export function AddPostScreen() {
                 </Modal>
                 <View style={styles.inputContainer}>
                     <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{'Give a title'}</Text>
-                        <Icon name='mic' size={16} color={COLORS.grey} />
+                        <Text style={styles.titleTxt}>{t('give_title')}</Text>
+                        {languageSwitch('title')}
                     </View>
                     <Divider style={styles.divider} />
                     <Input
-                        placeholder="Headline (80 Chars)"
+                        placeholder={`${t('headline')} (${t('80_chars')})`}
                         onChangeText={text => {
                             setTitle(text)
                         }}
@@ -125,12 +244,12 @@ export function AddPostScreen() {
                 </View>
                 <View style={[styles.inputContainer, { marginTop: 16 }]}>
                     <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{'Write a short news story'}</Text>
-                        <Icon name='mic' size={16} color={COLORS.grey} />
+                        <Text style={styles.titleTxt}>{t('write_short_news')}</Text>
+                        {languageSwitch('shortTitle')}
                     </View>
                     <Divider style={styles.divider} />
                     <Input
-                        placeholder="Short News (400 Chars)"
+                        placeholder={`${t('short_news')} (${t('400_chars')})`}
                         onChangeText={text => {
                             setShortTitle(text)
                         }}
@@ -143,12 +262,12 @@ export function AddPostScreen() {
                 </View>
                 <View style={[styles.inputContainer, { marginTop: 16 }]}>
                     <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{'Write a long news story'}</Text>
-                        <Icon name='mic' size={16} color={COLORS.grey} />
+                        <Text style={styles.titleTxt}>{t('write_long_news')}</Text>
+                        {languageSwitch('longTitle')}
                     </View>
                     <Divider style={styles.divider} />
                     <Input
-                        placeholder="Long News (1000 Chars)"
+                        placeholder={`${t('long_news')} (${t('1000_chars')})`}
                         onChangeText={text => {
                             setLongTitle(text)
                         }}
@@ -159,22 +278,22 @@ export function AddPostScreen() {
                         maxLength={1000}
                     />
                 </View>
-                <Text style={styles.categoryTitle}>{'Categories'}</Text>
+                <Text style={styles.categoryTitle}>{t('categories')}</Text>
                 <View style={styles.switchContainer}>
-                    <Text style={styles.inputTitleTxt}>{'Selected Category'}</Text>
+                    <Text style={styles.inputTitleTxt}>{t('selected_category')}</Text>
                     <TouchableOpacity style={styles.inputTitleTxt} onPress={handleCategorySelect}><Text style={styles.selectedCategoryTxt}>{selectedCategory}</Text></TouchableOpacity>
                 </View>
                 <View style={styles.switchContainer}>
-                    <Text style={styles.inputTitleTxt}>{'Breaking News'}</Text>
+                    <Text style={styles.inputTitleTxt}>{t('breaking_news')}</Text>
                     <TouchableOpacity
                         style={[styles.switchOutter, { justifyContent: isBreakingNewsOn ? 'flex-end' : 'flex-start' }]}
                         activeOpacity={1}
-                        onPress={onToggleChildSwitch}>
+                        onPress={onToggleSwitch}>
                         <View style={[styles.switchInner, { backgroundColor: isBreakingNewsOn ? COLORS.base : COLORS.lightblack }]} />
                     </TouchableOpacity>
                 </View>
                 <Button
-                    buttonTitle="Publish Article"
+                    buttonTitle={t('publish_article')}
                     onButtonPress={() => { }}
                     buttonTextStyle={styles.btnTxt}
                     containerStyle={styles.btnContainer}

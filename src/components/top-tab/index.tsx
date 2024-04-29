@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { TapGestureHandler } from 'react-native-gesture-handler';
+import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import styles from './style/top-tab.style';
@@ -11,15 +13,20 @@ interface Category {
     category: string;
 }
 
-type ButtonProps = {
-    onPress?: () => any;
+type Props = {
+    visible: boolean;
+    onOpenModal: () => void;
+    onCloseModal: () => void;
 };
 
 export const TopTab = ({
-    onPress
-}: ButtonProps) => {
+    visible,
+    onOpenModal,
+    onCloseModal
+}: Props) => {
+    const { t } = useTranslation();
 
-    const categoryData = [
+    const categoryData: Category[] = [
         {
             id: 1,
             category: 'Political',
@@ -47,10 +54,11 @@ export const TopTab = ({
     ]
 
     const [isCategoryModalVisible, setCategoryModalVisible] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(categoryData[0].category);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleCategorySelect = () => {
         setCategoryModalVisible(true);
+        onOpenModal()
     };
 
     const handleCategoryChange = (category: string) => {
@@ -60,6 +68,7 @@ export const TopTab = ({
 
     const handleCategoryModalClose = () => {
         setCategoryModalVisible(!isCategoryModalVisible);
+        onCloseModal();
     };
 
     // Render item for FlatList
@@ -70,11 +79,12 @@ export const TopTab = ({
         </TouchableOpacity>
     );
 
+
     const renderCategoryModal = () => {
         return (
             <View style={styles.modalContainer}>
                 <View style={styles.categoryContainer}>
-                    <Text style={styles.categoryHeading}>{'Select Category'}</Text>
+                    <Text style={styles.categoryHeading}>{t('select_category')}</Text>
                     <Icon name='close' size={24} color={COLORS.grey} onPress={handleCategoryModalClose} />
                 </View>
                 <Divider />
@@ -100,12 +110,16 @@ export const TopTab = ({
                 style={styles.modalView}>
                 {renderCategoryModal()}
             </Modal>
-            <View style={styles.topTabBarContainer}>
-                <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={handleCategorySelect}>
-                    <Text style={styles.tabBarTxt}>{selectedCategory}</Text>
-                    <Icon name='expand-more' size={24} color={COLORS.grey} />
-                </TouchableOpacity>
-            </View>
+            {visible && (
+                <TapGestureHandler enabled={true}>
+                    <View style={styles.topTabBarContainer}>
+                        <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={handleCategorySelect}>
+                            <Text style={styles.tabBarTxt}>{selectedCategory == null ? t('all_news') : selectedCategory}</Text>
+                            <Icon name='expand-more' size={24} color={COLORS.grey} />
+                        </TouchableOpacity>
+                    </View>
+                </TapGestureHandler>
+            )}
         </>
     );
 };

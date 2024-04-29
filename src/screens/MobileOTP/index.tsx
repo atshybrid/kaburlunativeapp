@@ -5,15 +5,21 @@ import styles from './style/index.style';
 import { COLORS } from '../../theme';
 import { Button, SplitInput } from '../../components';
 import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
+import { ROUTES } from '../../constants';
 
+interface NavigationProps {
+    navigation: any;
+    route: any;
+}
 
-export function MobileOTPScreen() {
+export function MobileOTPScreen({ route, navigation }: NavigationProps) {
     const { t } = useTranslation();
 
     const [otp, setOtp] = useState('');
 
     const handleSubmit = () => {
         // const otpValue = otp.join('');
+        navigation.navigate(ROUTES.SET_MPIN);
     };
 
     return (
@@ -22,8 +28,8 @@ export function MobileOTPScreen() {
             <View style={{ flex: 1 }}>
                 <KaburluLogo />
                 <View style={styles.otpTxtContainer}>
-                    <Text style={styles.otpVerifyTxt}>{'OTP Verification'}</Text>
-                    <Text style={styles.otpInfoTxt}>{'Enter the 4-digit code sent to your mobile number ending in XXXX'}</Text>
+                    <Text style={styles.otpVerifyTxt}>{t('otp_verification')}</Text>
+                    <Text style={styles.otpInfoTxt}>{`${t('otp_instruction')} XXXX`}</Text>
                 </View>
                 <SplitInput
                     value={otp}
@@ -33,12 +39,12 @@ export function MobileOTPScreen() {
                         console.log(`Entered OTP: ${value}`);
                     }}
                 />
-                <Text style={styles.otpReceiveTxt}>{`Didn't receive the OTP?`}<Text style={styles.otpResendTxt}>{'Resend'}</Text></Text>
+                <Text style={styles.otpReceiveTxt}>{`${t('not_receive_otp')} `}<Text style={styles.otpResendTxt}>{`${t('resend_now')}.`}</Text></Text>
             </View>
             <Button
-                buttonTitle="Submit"
+                buttonTitle={t('submit')}
                 onButtonPress={handleSubmit}
-                disabled={!otp}
+            // disabled={!otp} Add
             />
         </View>
     );

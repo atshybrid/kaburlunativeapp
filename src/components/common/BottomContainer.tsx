@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Platform, NativeModules } from 'react-native';
+import { Divider, RadioButton } from 'react-native-paper';
+import { TapGestureHandler } from 'react-native-gesture-handler';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import Share from 'react-native-share';
 import Modal from 'react-native-modal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,7 +10,7 @@ import { Button, Input } from '../../components';
 import { COLORS, FONTS } from '../../theme';
 import { BottomContainerProps } from '../templates/types';
 import { ROUTES } from '../../constants';
-import { Divider, RadioButton } from 'react-native-paper';
+import { shareImage } from '../../helpers';
 
 
 interface Report {
@@ -18,6 +19,7 @@ interface Report {
 }
 
 export const BottomContainer = ({
+    viewRef,
     data
 }: BottomContainerProps) => {
     const navigation = useNavigation<NavigationProp<any>>();
@@ -44,7 +46,6 @@ export const BottomContainer = ({
             label: 'Copyright violation',
         }
     ]
-
 
 
     const [reportMessage, setReportMessage] = useState('');
@@ -85,20 +86,6 @@ export const BottomContainer = ({
 
     const onPressComment = () => {
         navigation.navigate(ROUTES.COMMENT);
-    }
-
-    const onPressShare = () => {
-        const options = {
-            title: data.title,
-            message: data.subtitle
-        }
-        Share.open(options)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                err && console.log(err);
-            });
     }
 
     const onPressReport = () => {
@@ -184,44 +171,46 @@ export const BottomContainer = ({
                 </View>
             </View>
             <View style={styles.divider} />
-            <View style={[styles.bottomContainer, { marginHorizontal: 8 }]}>
-                <View style={styles.AuthorWrapperContainer}>
-                    <View style={styles.AuthorContainer}>
-                        <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbUp} activeOpacity={1}>
-                            {
-                                isSelectedThumbUp ?
-                                    <MaterialIcons name='thumb-up' size={24} color={COLORS.grey} />
-                                    :
-                                    <MaterialIcons name='thumb-up-off-alt' size={24} color={COLORS.grey} />
-                            }
-                            <Text style={styles.spaceIconTxt}>{totalLikes}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbDown} activeOpacity={1}>
-                            {
-                                isSelectedThumbDown ?
-                                    <MaterialIcons name='thumb-down' size={24} color={COLORS.grey} />
-                                    :
-                                    <MaterialIcons name='thumb-down-off-alt' size={24} color={COLORS.grey} />
-                            }
-                            <Text style={styles.spaceIconTxt}>{totalDislikes}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressComment} activeOpacity={1}>
-                            <MaterialCommunityIcons name='comment-processing-outline' size={24} color={COLORS.grey} />
-                            <Text style={styles.spaceIconTxt}>{data.comment}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.AuthorContainer}>
-                        <MaterialCommunityIcons name='share' size={24} color={COLORS.base} style={styles.space} onPress={onPressShare} />
-                        <MaterialIcons name='report-gmailerrorred' size={24} color={COLORS.grey} style={styles.space} onPress={onPressReport} />
+            <TapGestureHandler enabled={true}>
+                <View style={[styles.bottomContainer, { paddingHorizontal: 8 }]}>
+                    <View style={styles.AuthorWrapperContainer}>
+                        <View style={styles.AuthorContainer}>
+                            <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbUp} activeOpacity={1}>
+                                {
+                                    isSelectedThumbUp ?
+                                        <MaterialIcons name='thumb-up' size={24} color={COLORS.grey} />
+                                        :
+                                        <MaterialIcons name='thumb-up-off-alt' size={24} color={COLORS.grey} />
+                                }
+                                <Text style={styles.spaceIconTxt}>{totalLikes}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbDown} activeOpacity={1}>
+                                {
+                                    isSelectedThumbDown ?
+                                        <MaterialIcons name='thumb-down' size={24} color={COLORS.grey} />
+                                        :
+                                        <MaterialIcons name='thumb-down-off-alt' size={24} color={COLORS.grey} />
+                                }
+                                <Text style={styles.spaceIconTxt}>{totalDislikes}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressComment} activeOpacity={1}>
+                                <MaterialCommunityIcons name='comment-processing-outline' size={24} color={COLORS.grey} />
+                                <Text style={styles.spaceIconTxt}>{data.comment}</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.AuthorContainer}>
+                            <MaterialCommunityIcons name='share' size={24} color={COLORS.base} style={styles.space} onPress={() => shareImage(viewRef)} />
+                            <MaterialIcons name='report-gmailerrorred' size={24} color={COLORS.grey} style={styles.space} onPress={onPressReport} />
+                        </View>
                     </View>
                 </View>
-            </View>
+            </TapGestureHandler>
         </>
     );
 };
 
 const styles = StyleSheet.create({
-    bottomContainer: { flexDirection: 'row', margin: 16 },
+    bottomContainer: { flexDirection: 'row', padding: 16 },
     modalView: {
         justifyContent: 'flex-end',
         margin: 0,
@@ -258,7 +247,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 8
     },
     spaceIconTxt: {
-        marginLeft: 4
+        marginLeft: 4,
+        color: COLORS.grey
     },
     iconContainer: {
         justifyContent: 'center',

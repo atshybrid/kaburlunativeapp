@@ -4,7 +4,8 @@ import { COLORS, FONTS } from '../../../theme';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: 32
+        marginTop: 32,
+        backgroundColor: COLORS.white
     },
     txtContainer: {
         marginHorizontal: 24

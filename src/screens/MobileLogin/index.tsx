@@ -7,6 +7,7 @@ import { COLORS } from '../../theme';
 import { Button } from '../../components';
 import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
 import country from '../../assets/json/country.json'
+import { ROUTES } from '../../constants';
 
 interface Country {
     name: string;
@@ -15,7 +16,12 @@ interface Country {
     flag: string;
 }
 
-export function MobileLoginScreen() {
+interface NavigationProps {
+    navigation: any;
+    route: any;
+}
+
+export function MobileLoginScreen({ route, navigation }: NavigationProps) {
     const { t } = useTranslation();
 
     const [countryData, setCountryData] = useState<Country[]>([]);
@@ -84,14 +90,15 @@ export function MobileLoginScreen() {
             </Modal>
             <View style={{ flex: 1 }}>
                 <KaburluLogo />
-                <Text style={styles.welcomeTxt}>{'Welcome Back !'}</Text>
-                <Text style={styles.mobileTxt}>{'Enter your mobile number'}<Text style={styles.required}>{` *`}</Text></Text>
+                <Text style={styles.welcomeTxt}>{`${t('welcome_back')} !`}</Text>
+                <Text style={styles.mobileTxt}>{t('enter_your_mobile_number')}<Text style={styles.required}>{` *`}</Text></Text>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity style={styles.countryInput} onPress={handleCountryInput} activeOpacity={0.9}>
                         <Text style={styles.countryTxt}>{`+${countryCode}`}</Text>
                     </TouchableOpacity>
                     <TextInput
-                        placeholder='Enter Mobile Number'
+                        placeholder={t('enter_mobile_number')}
+                        placeholderTextColor={COLORS.grey}
                         style={styles.mobileInput}
                         cursorColor={COLORS.base}
                         value={phoneNumber}
@@ -102,9 +109,9 @@ export function MobileLoginScreen() {
                 </View>
             </View>
             <Button
-                buttonTitle="Get OTP"
-                onButtonPress={() => { }}
-                disabled={!phoneNumber}
+                buttonTitle={t('get_otp')}
+                onButtonPress={() => { navigation.navigate(ROUTES.MOBILE_OTP); }}
+            // disabled={!phoneNumber} Add
             />
         </View>
     );

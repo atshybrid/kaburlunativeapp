@@ -9,4 +9,5 @@ export * from './MobileLogin';
 export * from './MobileOTP';
 export * from './SetMPin';
 export * from './MPinLogin';
-export * from './Language';
+export * from './AppLanguage';
+export * from './ContentLanguage';

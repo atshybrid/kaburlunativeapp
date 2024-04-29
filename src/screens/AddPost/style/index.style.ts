@@ -99,6 +99,32 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: 8
     },
+    languageContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    languageSwitchOutter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: 40,
+        height: 18,
+        backgroundColor: COLORS.grey,
+        borderRadius: 12,
+        marginLeft: 8
+    },
+    languageSwitchInner: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 24,
+        height: 24,
+        backgroundColor: COLORS.base,
+        borderRadius: 16,
+    },
+    langTxt: {
+        fontSize: 10,
+        fontFamily: FONTS.interSemiBold,
+        color: COLORS.white,
+    },
     switchOutter: {
         flexDirection: 'row',
         width: 40,
@@ -109,7 +135,6 @@ const styles = StyleSheet.create({
     switchInner: {
         width: 24,
         height: 20,
-        backgroundColor: COLORS.lightblack,
         borderRadius: 12,
     },
     btnContainer: {

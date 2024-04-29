@@ -12,16 +12,17 @@ type SliderData = {
 
 type ImageSliderProps = {
     data: SliderData[];
+    viewRef: React.RefObject<View>;
 };
 
 export const ImageSlider = ({
-    data
+    data,
+    viewRef
 }: ImageSliderProps) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const flatListRef = useRef<FlatList | null>(null);
 
     const renderItem = ({ item, index }: { item: SliderData, index: number }) => {
-        const isLastSlide = index === data.length - 1;
         return (
             <View style={styles.slide}>
                 <Image source={{ uri: item.img }} style={styles.imgView} resizeMode='stretch' />
@@ -68,20 +69,22 @@ export const ImageSlider = ({
 
     return (
         <>
-            <FlatList
-                ref={flatListRef}
-                data={data}
-                horizontal
-                pagingEnabled
-                showsHorizontalScrollIndicator={false}
-                bounces={false}
-                style={styles.container}
-                renderItem={renderItem}
-                onMomentumScrollEnd={onMomentumScrollEnd}
-                onLayout={onLayout}
-                scrollEnabled={true}
-                initialNumToRender={data.length}
-            />
+            <View style={styles.container} collapsable={false} ref={viewRef}>
+                <FlatList
+                    ref={flatListRef}
+                    data={data}
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    bounces={false}
+                    style={styles.container}
+                    renderItem={renderItem}
+                    onMomentumScrollEnd={onMomentumScrollEnd}
+                    onLayout={onLayout}
+                    scrollEnabled={true}
+                    initialNumToRender={data.length}
+                />
+            </View>
             {data.length > 1 && renderPagination(activeIndex)}
         </>
     );

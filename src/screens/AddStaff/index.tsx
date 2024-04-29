@@ -101,7 +101,7 @@ export function AddStaffScreen() {
                     />
                 )}
                 <View style={styles.inputContainer}>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Name '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('name')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e Shiva"
                         onChangeText={text => {
@@ -110,10 +110,10 @@ export function AddStaffScreen() {
                         value={name}
                         containerStyle={styles.textInput}
                         maxLength={20}
-                        errorMessage={'Please enter a valid name'}
+                        errorMessage={t('valid_name')}
                         valid={inputValidation.name(name)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Email '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('email')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e  shiva@gmail.com"
                         keyboardType='email-address'
@@ -122,10 +122,10 @@ export function AddStaffScreen() {
                         }}
                         value={email}
                         containerStyle={styles.textInput}
-                        errorMessage={'Please enter a valid email address'}
+                        errorMessage={t('valid_email')}
                         valid={inputValidation.email(email)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Mobile Number '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('mobile_number')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e 919999999999"
                         keyboardType='phone-pad'
@@ -135,10 +135,10 @@ export function AddStaffScreen() {
                         }}
                         value={number}
                         containerStyle={styles.textInput}
-                        errorMessage={'Please enter a valid 10 digit mobile number'}
+                        errorMessage={t('valid_number')}
                         valid={inputValidation.phone(number)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Hire Date '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('hire_date')} `}<Text style={styles.required}>*</Text></Text>
                     <TouchableOpacity
                         activeOpacity={1}
                         style={styles.dateContainer}
@@ -146,18 +146,18 @@ export function AddStaffScreen() {
                         {date && (<Text style={styles.dateTxt}>{moment(date).format('DD-MM-YY')}</Text>)}
                         <Icon name='calendar-month' size={16} color={COLORS.base} />
                     </TouchableOpacity>
-                    <Text style={styles.dateInfoTxt}>{'The first day of employment for this person.'}</Text>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Reporter Type '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={styles.dateInfoTxt}>{`${t('hire_instruction')}.`}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_reporter_type')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="Report" data={options} onSelect={handleSelectReporterType} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Work Area '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_work_area')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e 503101" data={options} onSelect={handleSelectWorkArea} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Parent Reporter '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_parent_reporter')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e Bhiknoor" data={options} onSelect={handleSelectParentReporter} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{'Select Subscription Plan '}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_subscription_plan')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e 1000 Rs Pay" data={options} onSelect={handleSelectSubscriptionPlan} />
                 </View>
                 <View style={styles.switchContainer}>
-                    <Text style={styles.inputTitleTxt}>{'Article auto publish'}</Text>
+                    <Text style={styles.inputTitleTxt}>{t('article_auto_publish')}</Text>
                     <TouchableOpacity
                         style={[styles.switchOutter, { justifyContent: isSwitchOn ? 'flex-end' : 'flex-start' }]}
                         activeOpacity={1}
@@ -166,7 +166,7 @@ export function AddStaffScreen() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.switchContainer}>
-                    <Text style={styles.inputTitleTxt}>{'Child Article auto publish'}</Text>
+                    <Text style={styles.inputTitleTxt}>{`${t('child')} ${t('article_auto_publish')}`}</Text>
                     <TouchableOpacity
                         style={[styles.switchOutter, { justifyContent: isChildSwitchOn ? 'flex-end' : 'flex-start' }]}
                         activeOpacity={1}
@@ -175,7 +175,7 @@ export function AddStaffScreen() {
                     </TouchableOpacity>
                 </View>
                 <Button
-                    buttonTitle="Create Employee"
+                    buttonTitle={t('create_employee')}
                     onButtonPress={onButtonPress}
                     disabled={!fieldsCorrect}
                     buttonTextStyle={[styles.btnTxt, { color: !fieldsCorrect ? COLORS.grey : COLORS.base }]}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './style/template.style';
 import { COLORS } from '../../theme';
@@ -8,10 +8,11 @@ import { TemplateProps } from './types';
 export const ThirdTemplate = ({
     data
 }: TemplateProps) => {
+    const viewRef = useRef<View>(null);
     return (
         <>
             <TopContainer />
-            <View style={styles.container}>
+            <View style={styles.container} ref={viewRef}>
                 <View style={styles.txtContainer}>
                     <Text style={styles.categoryTxt}>{data.category}</Text>
                     <View style={styles.titleContainer}>
@@ -27,7 +28,7 @@ export const ThirdTemplate = ({
                     <Text style={styles.shortDescTxt}>{data.shortdesc}</Text>
                 </View>
             </View>
-            <BottomContainer data={data} />
+            <BottomContainer viewRef={viewRef} data={data} />
         </>
     );
 };

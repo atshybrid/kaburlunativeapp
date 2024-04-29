@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         height: 6,
         borderRadius: 3,
         marginHorizontal: 4,
-    },
+    }
 });
 
 export default styles;

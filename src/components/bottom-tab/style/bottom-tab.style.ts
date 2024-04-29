@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         position: 'absolute',
         width: width,
-        padding: 8,
         bottom: 0,
         zIndex: 1,
         backgroundColor: COLORS.white,
@@ -17,7 +16,8 @@ const styles = StyleSheet.create({
     },
     bottomTabBarItem: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingVertical: 8
     }
 });
 

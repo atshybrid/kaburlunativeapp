@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './style/template.style';
 import { COLORS } from '../../theme';
@@ -8,11 +8,12 @@ import { TemplateProps } from './types';
 export const SecondTemplate = ({
     data
 }: TemplateProps) => {
+    const viewRef = useRef<View>(null);
     return (
         <>
             <TopContainer />
-            <View style={styles.container}>
-                <View style={styles.txtContainer}>
+            <View style={styles.container} ref={viewRef}>
+                <View style={[styles.txtContainer, { flex: 1 }]}>
                     <Text style={styles.categoryTxt}>{data.category}</Text>
                     <View style={styles.titleContainer}>
                         <Text style={[styles.titleTxt, { fontSize: 22 }]}>{data.title}</Text>
@@ -20,9 +21,9 @@ export const SecondTemplate = ({
                     </View>
                     <Text style={styles.shortDescTxt}>{data.shortdesc}</Text>
                 </View>
+                <Image source={data.img} resizeMode='stretch' />
             </View>
-            <Image source={data.img} resizeMode='stretch' />
-            <BottomContainer data={data} />
+            <BottomContainer viewRef={viewRef} data={data} />
         </>
     );
 };

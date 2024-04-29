@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         color: COLORS.base,
         fontFamily: FONTS.interBold,
         marginTop: 4,
-        textAlign: 'right'
+        textAlign: 'right',
+        textTransform: 'uppercase'
     },
     textInput: {
         height: 40

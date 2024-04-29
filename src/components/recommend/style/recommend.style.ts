@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.base
     },
     centerContainer: {
-        margin: 32,
+        marginVertical: 24,
         alignItems: 'center'
     },
     recommendTxt: {
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: '#FF7C64',
         borderRadius: 8,
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        marginVertical: 4
     },
     articleImg: {
         width: 80,
@@ -39,6 +40,10 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         alignSelf: 'flex-end'
+    },
+    adContainer: {
+        alignSelf: 'center',
+        marginTop: 16
     }
 });
 

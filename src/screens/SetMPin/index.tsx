@@ -5,9 +5,14 @@ import styles from './style/index.style';
 import { COLORS } from '../../theme';
 import { Button, SplitInput } from '../../components';
 import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
+import { ROUTES } from '../../constants';
 
+interface NavigationProps {
+    navigation: any;
+    route: any;
+}
 
-export function SetMPinScreen() {
+export function SetMPinScreen({ route, navigation }: NavigationProps) {
     const { t } = useTranslation();
 
     const [newMPin, setNewMPin] = useState('');
@@ -18,8 +23,8 @@ export function SetMPinScreen() {
             <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
             <View style={{ flex: 1 }}>
                 <KaburluLogo />
-                <Text style={styles.mPinCreateTxt}>{'Create MPIN'}</Text>
-                <Text style={styles.mPinEnterTxt}>{'Enter New MPIN'}</Text>
+                <Text style={styles.mPinCreateTxt}>{t('create_mpin')}</Text>
+                <Text style={styles.mPinEnterTxt}>{t('new_mpin')}</Text>
                 <SplitInput
                     value={newMPin}
                     length={4}
@@ -28,7 +33,7 @@ export function SetMPinScreen() {
                         setNewMPin(value)
                     }}
                 />
-                <Text style={styles.mPinEnterTxt}>{'Enter Confirm MPIN'}</Text>
+                <Text style={styles.mPinEnterTxt}>{t('confirm_mpin')}</Text>
                 <SplitInput
                     value={confirmMPin}
                     length={4}
@@ -39,9 +44,9 @@ export function SetMPinScreen() {
                 />
             </View>
             <Button
-                buttonTitle="Set MPIN"
-                onButtonPress={() => { }}
-                disabled={!newMPin || !confirmMPin || newMPin !== confirmMPin}
+                buttonTitle={t('set_mpin')}
+                onButtonPress={() => { navigation.navigate(ROUTES.MPIN_LOGIN); }}
+            // disabled={!newMPin || !confirmMPin || newMPin !== confirmMPin} Add
             />
         </View>
     );

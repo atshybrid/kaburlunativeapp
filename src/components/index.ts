@@ -9,3 +9,4 @@ export * from './common';
 export * from './input';
 export * from './button';
 export * from './dropdown';
+export * from './swipe-card';

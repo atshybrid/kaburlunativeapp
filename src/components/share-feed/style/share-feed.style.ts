@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: COLORS.lightblack,
         fontFamily: FONTS.interBold,
+        textTransform: 'uppercase'
     },
     rightContainer: {
         flexDirection: 'row',
