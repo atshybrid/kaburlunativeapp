@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
@@ -7,34 +7,34 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.base
     },
     centerContainer: {
-        marginVertical: 24,
+        marginVertical: METRICS.baseVerticalSpace,
         alignItems: 'center'
     },
     recommendTxt: {
-        fontSize: 16,
+        fontSize: METRICS.fontScale(16),
         color: COLORS.white,
         fontFamily: FONTS.interBold,
         textAlign: 'center',
     },
     articleContainer: {
         flexDirection: 'row',
-        padding: 8,
+        padding: METRICS.halfVerticalSpace,
         backgroundColor: '#FF7C64',
-        borderRadius: 8,
-        marginHorizontal: 16,
-        marginVertical: 4
+        borderRadius: METRICS.halfHorizontalSpace,
+        marginHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        marginVertical: METRICS.halfVerticalSpace / 2
     },
     articleImg: {
-        width: 80,
-        height: 80,
-        borderRadius: 8
+        width: METRICS.images.small * 2.5,
+        height: METRICS.images.small * 2.5,
+        borderRadius: METRICS.halfHorizontalSpace
     },
     infoContainer: {
         flex: 1,
-        marginLeft: 8,
+        marginLeft: METRICS.baseHorizontalSpace,
     },
     articleTxt: {
-        fontSize: 18,
+        fontSize: METRICS.fontScale(18),
         color: COLORS.white,
         fontFamily: FONTS.interBold
     },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     adContainer: {
         alignSelf: 'center',
-        marginTop: 16
+        marginTop: METRICS.baseVerticalSpace
     }
 });
 

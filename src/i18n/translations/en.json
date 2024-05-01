@@ -1,9 +1,11 @@
 {
+  "retry": "Retry",
   "all_news": "All News",
   "menu": "Menu",
   "search": "Search",
   "unread": "Unread",
   "reload": "Reload",
+  "report_mistake": "Report a mistake",
   "to": "to",
   "the": "the",
   "shares": "shares",

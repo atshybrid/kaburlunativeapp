@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 32,
+        padding: METRICS.baseVerticalSpace * 2,
         backgroundColor: COLORS.white,
     },
     modalView: {
@@ -12,28 +12,28 @@ const styles = StyleSheet.create({
         margin: 0,
     },
     modalContainer: {
-        padding: 32,
+        padding: METRICS.baseVerticalSpace * 2,
         backgroundColor: COLORS.white,
     },
     modalItem: {
         flexDirection: 'row',
-        paddingVertical: 10,
+        paddingVertical: METRICS.baseVerticalSpace,
         alignItems: 'center'
     },
     countryImg: {
-        width: 24,
-        height: 16
+        width: METRICS.icons.medium,
+        height: METRICS.icons.tiny
     },
     welcomeTxt: {
-        fontSize: 32,
+        fontSize: METRICS.fontScale(32),
         textAlign: 'center',
         fontFamily: FONTS.interBold,
         color: COLORS.grey,
-        marginVertical: 32,
+        marginVertical: METRICS.baseVerticalSpace * 3,
         opacity: 0.8
     },
     mobileTxt: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         fontFamily: FONTS.interRegular,
         color: COLORS.lightblack,
     },
@@ -42,17 +42,17 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flexDirection: 'row',
-        marginTop: 8
+        marginTop: METRICS.halfVerticalSpace
     },
     countryInput: {
         flex: 0.2,
-        height: 40,
+        height: METRICS.inputHeight,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: COLORS.lightwhite,
-        borderRadius: 8,
-        paddingHorizontal: 16,
-        marginRight: 6
+        borderRadius: METRICS.halfHorizontalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace,
+        marginRight: METRICS.halfHorizontalSpace
     },
     countryTxt: {
         fontFamily: FONTS.interRegular,
@@ -60,12 +60,14 @@ const styles = StyleSheet.create({
     },
     mobileInput: {
         flex: 0.8,
-        height: 40,
+        height: METRICS.inputHeight,
         backgroundColor: COLORS.lightwhite,
         fontFamily: FONTS.interRegular,
         color: COLORS.black,
-        borderRadius: 8,
-        paddingHorizontal: 16,
+        borderRadius: METRICS.halfHorizontalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        textAlignVertical: 'center',
+        paddingVertical: 0
     }
 });
 

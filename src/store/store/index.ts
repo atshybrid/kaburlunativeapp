@@ -12,6 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['language']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

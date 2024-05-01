@@ -7,7 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import styles from './style/share-feed.style';
 import { ImageSlider } from '../image-slider';
 import { shareImage } from '../../helpers';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 
 type ShareFeedProps = {
 
@@ -45,23 +45,23 @@ export const ShareFeed = ({
     return (
         <>
             <ImageSlider data={sliderData} viewRef={viewRef} />
-            <TapGestureHandler enabled={true}>
+            <TapGestureHandler enabled={true} shouldCancelWhenOutside={false}>
                 <View style={styles.bottomContainer}>
                     <TouchableOpacity style={styles.leftContainer} activeOpacity={1} onPress={() => { }}>
                         <Text style={styles.viralPostTxt}>{t('viral_posts')}</Text>
-                        <MaterialCommunityIcons name='chevron-double-right' size={20} color={COLORS.base} />
+                        <MaterialCommunityIcons name='chevron-double-right' size={METRICS.icons.medium} color={COLORS.base} />
                     </TouchableOpacity>
                     <View style={styles.middleContainer}>
                         <View style={styles.outterIconContainer}>
-                            <TouchableOpacity style={styles.innerIconContainer} activeOpacity={1} onPress={() => { }}>
-                                <MaterialCommunityIcons name='whatsapp' size={32} color={COLORS.white} />
+                            <TouchableOpacity style={styles.innerIconContainer} activeOpacity={1} onPress={() => shareImage(viewRef, true)}>
+                                <MaterialCommunityIcons name='whatsapp' size={METRICS.icons.large} color={COLORS.white} />
                             </TouchableOpacity>
                         </View>
                         <Text style={styles.totalShareTxt}>{`23 ${t('shares')}`}</Text>
                     </View>
                     <View style={styles.rightContainer}>
-                        <MaterialIcons name='more-vert' size={20} color={COLORS.lightwhite} />
-                        <MaterialCommunityIcons name='share' size={20} color={COLORS.lightblack} onPress={() => shareImage(viewRef)} />
+                        <MaterialIcons name='more-vert' size={METRICS.icons.medium} color={COLORS.lightwhite} />
+                        <MaterialCommunityIcons name='share' size={METRICS.icons.medium} color={COLORS.lightblack} style={{ marginLeft: METRICS.halfHorizontalSpace }} onPress={() => shareImage(viewRef)} />
                     </View>
                 </View>
             </TapGestureHandler>

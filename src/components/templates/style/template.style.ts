@@ -1,54 +1,54 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 32,
+        marginTop: METRICS.baseVerticalSpace,
         backgroundColor: COLORS.white
     },
     txtContainer: {
-        marginHorizontal: 24
+        marginHorizontal: METRICS.baseHorizontalSpace * 1.5
     },
     categoryTxt: {
-        fontSize: 14,
+        fontSize: METRICS.fontScale(14),
         fontFamily: FONTS.interBold,
         color: COLORS.grey
     },
     titleContainer: {
-        marginVertical: 16
+        marginVertical: METRICS.baseVerticalSpace
     },
     titleTxt: {
-        fontSize: 16,
+        fontSize: METRICS.fontScale(16),
         textAlign: 'center',
         fontWeight: 'bold',
         fontFamily: FONTS.interSemiBold,
         color: COLORS.orange
     },
     subTitleTxt: {
-        fontSize: 32,
+        fontSize: METRICS.fontScale(32),
         textAlign: 'center',
         fontFamily: FONTS.interBold,
         color: COLORS.lightred
     },
     shortDescTxt: {
-        fontSize: 18,
-        lineHeight: 24,
+        fontSize: METRICS.fontScale(18),
+        lineHeight: METRICS.fontScale(24),
         fontFamily: FONTS.interRegular,
         color: COLORS.grey
     },
     imgTitleContainer: {
-        paddingVertical: 8,
+        paddingVertical: METRICS.halfVerticalSpace,
         backgroundColor: COLORS.lightred,
     },
     imgTitleTxt: {
-        fontSize: 16,
+        fontSize: METRICS.fontScale(16),
         fontFamily: FONTS.interBold,
         color: COLORS.white,
         textAlign: 'center'
     },
     imgStyle: {
-        width: '100%',
+        width: METRICS.windowWidth,
     }
 });
 

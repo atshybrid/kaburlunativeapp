@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import {
-    StatusBar,
-    View,
     Animated,
     PanResponder,
-    SafeAreaView,
-    Platform,
-    Dimensions
+    SafeAreaView
 } from 'react-native';
 import { NewsItem } from '../../constants';
 import styles from './style/swipe-card.style';
-
-const { height, width } = Dimensions.get('screen')
+import { METRICS } from '../../theme';
 
 type SwipeCardProps = {
     data: NewsItem[],
@@ -25,17 +20,17 @@ export const SwipeCard = ({
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const position = new Animated.ValueXY();
-    const swipedCardPosition = new Animated.ValueXY({ x: 0, y: -height });
+    const swipedCardPosition = new Animated.ValueXY({ x: 0, y: -METRICS.windowHeight });
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (_, gestureState) => {
             if (currentIndex === 0 && gestureState.dy > 0) {
-                swipedCardPosition.setValue({ x: 0, y: -height + gestureState.dy });
+                swipedCardPosition.setValue({ x: 0, y: -METRICS.windowHeight + gestureState.dy });
             } else if (currentIndex === data.length - 1 && gestureState.dy < 0) {
-                swipedCardPosition.setValue({ x: 0, y: -height + gestureState.dy });
+                swipedCardPosition.setValue({ x: 0, y: -METRICS.windowHeight + gestureState.dy });
             } else if (gestureState.dy > 0 && (currentIndex > 0)) {
-                swipedCardPosition.setValue({ x: 0, y: -height + gestureState.dy })
+                swipedCardPosition.setValue({ x: 0, y: -METRICS.windowHeight + gestureState.dy })
             } else {
                 position.setValue({ x: 0, y: gestureState.dy })
             }
@@ -48,11 +43,11 @@ export const SwipeCard = ({
                     useNativeDriver: false
                 }).start(() => {
                     setCurrentIndex(currentIndex - 1);
-                    swipedCardPosition.setValue({ x: 0, y: -height });
+                    swipedCardPosition.setValue({ x: 0, y: -METRICS.windowHeight });
                 });
             } else if (-gestureState.dy > 50 && -gestureState.vy > 0.7 && currentIndex < data.length - 1) {
                 Animated.timing(position, {
-                    toValue: { x: 0, y: -height },
+                    toValue: { x: 0, y: -METRICS.windowHeight },
                     duration: 400,
                     useNativeDriver: false
                 }).start(() => {
@@ -64,10 +59,12 @@ export const SwipeCard = ({
                     Animated.spring(position, {
                         toValue: { x: 0, y: 0 },
                         useNativeDriver: false,
+                        bounciness: 0
                     }),
                     Animated.spring(swipedCardPosition, {
-                        toValue: { x: 0, y: -height },
+                        toValue: { x: 0, y: -METRICS.windowHeight },
                         useNativeDriver: false,
+                        bounciness: 0
                     })
                 ]).start();
             }
@@ -108,7 +105,7 @@ export const SwipeCard = ({
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} >
             {renderArticles()}
         </SafeAreaView>
     );

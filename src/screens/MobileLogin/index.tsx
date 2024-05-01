@@ -3,7 +3,7 @@ import { View, StatusBar, Text, Image, TextInput, TouchableOpacity, FlatList } f
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import styles from './style/index.style';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import { Button } from '../../components';
 import KaburluLogo from '../../assets/kaburllu_logo_orange.svg';
 import country from '../../assets/json/country.json'
@@ -57,7 +57,7 @@ export function MobileLoginScreen({ route, navigation }: NavigationProps) {
         <View style={styles.modalItem}>
             <TouchableOpacity style={{ flexDirection: 'row', flex: 1 }} activeOpacity={0.8} onPress={() => handleCountryChange(item.callingCode)}>
                 <Image source={{ uri: item.flag }} style={styles.countryImg} />
-                <Text style={[styles.countryTxt, { marginLeft: 12 }]}>{item.name}</Text>
+                <Text style={[styles.countryTxt, { marginLeft: METRICS.baseHorizontalSpace }]}>{item.name}</Text>
                 <Text style={styles.countryTxt}>{` (${item.code})`}</Text>
             </TouchableOpacity>
             <Text style={styles.countryTxt}>{`(+${item.callingCode})`}</Text>

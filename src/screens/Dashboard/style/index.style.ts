@@ -1,31 +1,31 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
+        padding: METRICS.baseVerticalSpace * 1.5,
         backgroundColor: COLORS.white,
     },
     modalContainer: {
         backgroundColor: COLORS.white,
     },
     modalTopContainer: {
-        paddingVertical: 8,
+        paddingVertical: METRICS.baseVerticalSpace,
         alignItems: 'center',
         backgroundColor: COLORS.lightgreen,
     },
     modalMainContainer: {
-        marginVertical: 32,
-        marginHorizontal: 16
+        marginVertical: METRICS.baseVerticalSpace * 2,
+        marginHorizontal: METRICS.baseHorizontalSpace * 1.5
     },
     titleTxt: {
-        fontSize: 18,
+        fontSize: METRICS.fontScale(18),
         color: COLORS.lightblack,
         fontFamily: FONTS.interBold,
     },
     subTitleTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.lightblack,
         fontFamily: FONTS.interRegular,
         textAlign: 'justify'
@@ -33,23 +33,23 @@ const styles = StyleSheet.create({
     inputTitleTxt: {
         color: COLORS.lightblack,
         fontFamily: FONTS.interMedium,
-        fontSize: 12,
-        marginLeft: 4,
-        marginBottom: 4,
+        fontSize: METRICS.fontScale(12),
+        marginLeft: METRICS.halfHorizontalSpace,
+        marginBottom: METRICS.halfVerticalSpace,
     },
     getOTPTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.base,
         fontFamily: FONTS.interBold,
-        marginTop: 4,
+        marginTop: METRICS.halfVerticalSpace,
         textAlign: 'right',
         textTransform: 'uppercase'
     },
     textInput: {
-        height: 40
+        height: METRICS.inputHeight
     },
     btnContainer: {
-        marginTop: 32,
+        marginTop: METRICS.baseVerticalSpace * 2,
         alignSelf: 'center',
         width: '60%',
         backgroundColor: COLORS.white,
@@ -70,40 +70,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     txtContainer: {
-        marginLeft: 8
+        marginLeft: METRICS.halfHorizontalSpace
     },
     nameTxt: {
-        fontSize: 14,
+        fontSize: METRICS.fontScale(14),
         color: COLORS.lightblack,
         fontFamily: FONTS.interBold,
     },
     roleTxt: {
-        fontSize: 16,
+        fontSize: METRICS.fontScale(16),
         color: COLORS.grey,
         fontFamily: FONTS.interMedium,
     },
     subNameTxt: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         color: COLORS.grey,
         fontFamily: FONTS.interRegular,
     },
     articleTopContainer: {
         flexDirection: 'row',
         alignItems: "center",
-        marginVertical: 8,
-        marginHorizontal: 4,
-        padding: 16,
+        marginVertical: METRICS.halfVerticalSpace,
+        marginHorizontal: METRICS.halfHorizontalSpace,
+        padding: METRICS.baseVerticalSpace * 1.5,
         backgroundColor: COLORS.lightsky,
-        borderRadius: 12,
+        borderRadius: METRICS.baseHorizontalSpace,
     },
     articleTitle: {
-        fontSize: 18,
+        fontSize: METRICS.fontScale(18),
         color: COLORS.sky,
         fontFamily: FONTS.interBold,
         textAlign: 'center'
     },
     articleSubTitle: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.lightblack,
         fontFamily: FONTS.interBold,
         textAlign: 'center'
@@ -114,19 +114,19 @@ const styles = StyleSheet.create({
     },
     articleItem: {
         flex: 1,
-        paddingVertical: 12,
-        margin: 4,
+        paddingVertical: METRICS.baseVerticalSpace,
+        margin: METRICS.halfVerticalSpace,
         alignItems: 'center',
-        borderRadius: 12
+        borderRadius: METRICS.baseHorizontalSpace
     },
     articleItemContainer: {
         flexDirection: 'row',
         alignItems: 'center'
     },
     totalArticle: {
-        fontSize: 24,
+        fontSize: METRICS.fontScale(24),
         fontFamily: FONTS.interBold,
-        marginLeft: 8
+        marginLeft: METRICS.halfHorizontalSpace
     }
 });
 

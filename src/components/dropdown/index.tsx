@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/dropdown.style';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 
 type Option = {
     label: string;
@@ -91,7 +91,7 @@ export const Dropdown = ({
                     <Text style={[styles.buttonText, { color: COLORS.lightblack }]}>{selected.label}</Text> :
                     <Text style={styles.buttonText}>{label}</Text>
                 }
-                <Icon name={visible ? 'expand-less' : 'expand-more'} size={24} color={COLORS.lightwhite} />
+                <Icon name={visible ? 'expand-less' : 'expand-more'} size={METRICS.icons.medium} color={COLORS.lightwhite} />
             </TouchableOpacity>
             {renderDropdown()}
         </>

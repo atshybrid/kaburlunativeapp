@@ -1,6 +1,6 @@
-import { View, Platform, NativeModules } from 'react-native';
+import { View, Platform, NativeModules, ToastAndroid } from 'react-native';
 import RNFS from 'react-native-fs';
-import Share from 'react-native-share';
+import Share, { ShareSingleOptions } from 'react-native-share';
 import { captureRef } from 'react-native-view-shot';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 
@@ -18,7 +18,7 @@ export const fileToBase64 = async (imageUrl: string) => {
 };
 
 
-export const shareImage = async (viewRef: React.RefObject<View>) => {
+export const shareImage = async (viewRef: React.RefObject<View>, isSocial = false) => {
     try {
         if (!viewRef.current) return;
 
@@ -36,14 +36,28 @@ export const shareImage = async (viewRef: React.RefObject<View>) => {
                     try {
                         const shareOptions = {
                             title: 'Kaburllu',
-                            message: `Save time. Download Kaburllu, India's highest rated local news app, to read news in 60 words.\nhttps://kaburllu.in/7Q33L`,
+                            message: `https://kaburllu.in/7Q33L`,
                             url: dataUrl,
-                            type: 'image/jpeg',
+                            type: 'image/jpeg'
                         };
 
-                        await Share.open(shareOptions); // Await the share operation
+                        const whatsAppOptions: ShareSingleOptions = {
+                            social: Share.Social.WHATSAPP,
+                            forceDialog: false,
+                            ...shareOptions
+                        };
+
+                        const { isInstalled } = await Share.isPackageInstalled('com.whatsapp');
+
+                        if (isSocial && isInstalled) {
+                            await Share.shareSingle(whatsAppOptions);
+                        } else if (isSocial && !isInstalled) {
+                            ToastAndroid.show("WhatsApp is not installed", ToastAndroid.LONG)
+                        } else {
+                            await Share.open(shareOptions);
+                        }
+
                         console.log("Image shared successfully");
-                        // Now you can use the data URL in your application
                     } catch (error) {
                         console.error('Error sharing image: ', error);
                     }

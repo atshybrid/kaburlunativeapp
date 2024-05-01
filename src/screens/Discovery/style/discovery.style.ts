@@ -1,33 +1,33 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   guestContainer: {
-    padding: 16,
+    padding: METRICS.baseVerticalSpace * 1.5,
     justifyContent: 'center',
     backgroundColor: COLORS.lightwhite,
   },
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 32,
-    width: 32,
-    borderRadius: 16,
+    height: METRICS.images.small,
+    width: METRICS.images.small,
+    borderRadius: METRICS.baseHorizontalSpace * 1.5,
     backgroundColor: COLORS.grey
   },
   guestTxtContainer: {
-    marginLeft: 8
+    marginLeft: METRICS.halfHorizontalSpace
   },
   guestTxt: {
-    fontSize: 14,
+    fontSize: METRICS.fontScale(14),
     fontFamily: FONTS.interBold,
     color: COLORS.black
   },
   guestSubTxt: {
-    fontSize: 8,
+    fontSize: METRICS.fontScale(8),
     fontFamily: FONTS.interBold,
     color: COLORS.grey
   },
@@ -38,29 +38,29 @@ const styles = StyleSheet.create({
     // backgroundColor: COLORS.white
   },
   topOptionsContainer: {
-    padding: 16,
+    padding: METRICS.baseVerticalSpace * 1.5,
     backgroundColor: COLORS.white,
   },
   bottomOptionsContainer: {
-    margin: 32
+    margin: METRICS.baseHorizontalSpace * 2
   },
   listTitleTxt: {
-    fontSize: 14,
+    fontSize: METRICS.fontScale(14),
     fontFamily: FONTS.interBold,
     color: COLORS.grey
   },
   listDescTxt: {
-    marginTop: 4,
-    fontSize: 12,
+    marginTop: METRICS.halfVerticalSpace,
+    fontSize: METRICS.fontScale(12),
     fontFamily: FONTS.interBold,
     color: COLORS.red
   },
   listIconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 24,
-    width: 24,
-    borderRadius: 12,
+    height: METRICS.icons.medium,
+    width: METRICS.icons.medium,
+    borderRadius: METRICS.baseHorizontalSpace,
     backgroundColor: COLORS.black
   }
 });

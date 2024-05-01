@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     bottomContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingVertical: 16,
-        paddingHorizontal: 8,
+        paddingVertical: METRICS.baseVerticalSpace * 1.5,
+        paddingHorizontal: METRICS.baseHorizontalSpace,
         backgroundColor: COLORS.white
     },
     leftContainer: {
@@ -19,30 +19,28 @@ const styles = StyleSheet.create({
     middleContainer: {
         position: 'absolute',
         zIndex: 1,
-        bottom: 8,
-        left: 0,
-        right: 0,
-        alignSelf: 'center',
-        alignItems: 'center'
+        bottom: METRICS.shareBtn,
+        left: (METRICS.windowWidth / 2) - (METRICS.images.medium / 2),
+        alignItems: 'center',
     },
     outterIconContainer: {
-        width: 64,
-        height: 64,
+        width: METRICS.images.medium,
+        height: METRICS.images.medium,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: COLORS.white,
-        borderRadius: 32
+        borderRadius: METRICS.images.medium / 2
     },
     innerIconContainer: {
-        width: 48,
-        height: 48,
+        width: METRICS.images.small * 1.5,
+        height: METRICS.images.small * 1.5,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: COLORS.green,
-        borderRadius: 24
+        borderRadius: METRICS.images.tiny
     },
     totalShareTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.lightblack,
         fontFamily: FONTS.interBold,
         textTransform: 'uppercase'
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     viralPostTxt: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         color: COLORS.base,
         fontFamily: FONTS.interBold,
     }

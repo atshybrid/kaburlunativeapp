@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import styles from './style/top-tab.style';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import { Divider } from 'react-native-paper';
 
 interface Category {
@@ -85,7 +85,7 @@ export const TopTab = ({
             <View style={styles.modalContainer}>
                 <View style={styles.categoryContainer}>
                     <Text style={styles.categoryHeading}>{t('select_category')}</Text>
-                    <Icon name='close' size={24} color={COLORS.grey} onPress={handleCategoryModalClose} />
+                    <Icon name='close' size={METRICS.icons.medium} color={COLORS.grey} onPress={handleCategoryModalClose} />
                 </View>
                 <Divider />
                 <FlatList
@@ -111,11 +111,11 @@ export const TopTab = ({
                 {renderCategoryModal()}
             </Modal>
             {visible && (
-                <TapGestureHandler enabled={true}>
+                <TapGestureHandler enabled={true} shouldCancelWhenOutside={false}>
                     <View style={styles.topTabBarContainer}>
                         <TouchableOpacity style={styles.tabBarItem} activeOpacity={1} onPress={handleCategorySelect}>
                             <Text style={styles.tabBarTxt}>{selectedCategory == null ? t('all_news') : selectedCategory}</Text>
-                            <Icon name='expand-more' size={24} color={COLORS.grey} />
+                            <Icon name='expand-more' size={METRICS.icons.medium} color={COLORS.grey} />
                         </TouchableOpacity>
                     </View>
                 </TapGestureHandler>

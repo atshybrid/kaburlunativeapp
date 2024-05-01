@@ -1,9 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { FlatList, View, Dimensions, ImageSourcePropType, Image, Text } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import styles from './style/image-slider.style';
-import { COLORS } from '../../theme';
-
-const { width } = Dimensions.get("window");
+import { COLORS, METRICS } from '../../theme';
 
 type SliderData = {
     id: number;
@@ -24,7 +22,7 @@ export const ImageSlider = ({
 
     const renderItem = ({ item, index }: { item: SliderData, index: number }) => {
         return (
-            <View style={styles.slide}>
+            <View style={styles.slide} key={index}>
                 <Image source={{ uri: item.img }} style={styles.imgView} resizeMode='stretch' />
             </View>
         );
@@ -32,7 +30,7 @@ export const ImageSlider = ({
 
     const onMomentumScrollEnd = (e: any) => {
         const offset = e.nativeEvent.contentOffset.x;
-        const newIndex = Math.round(offset / width);
+        const newIndex = Math.round(offset / METRICS.windowWidth);
         if (newIndex === activeIndex) {
             return;
         }
@@ -58,7 +56,7 @@ export const ImageSlider = ({
                         style={[
                             styles.dot,
                             i === previousIndex
-                                ? { backgroundColor: COLORS.white, width: 12 }
+                                ? { backgroundColor: COLORS.white, width: METRICS.icons.tiny }
                                 : { backgroundColor: COLORS.grey },
                         ]}
                     />

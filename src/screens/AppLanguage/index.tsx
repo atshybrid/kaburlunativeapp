@@ -3,9 +3,9 @@ import { View, StatusBar, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import styles from './style/index.style';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import { RootState } from '../../store';
-import { languageStateIF } from '../../store/reducers/languageReducer';
+import { languageState } from '../../store/reducers/languageReducer';
 import { CONSTANTS } from '../../constants';
 
 interface Language {
@@ -26,14 +26,14 @@ const data: Language[] = [
 ];
 
 export function AppLanguageScreen() {
-    const state = useSelector((state: RootState): languageStateIF => state.language);
+    const language = useSelector((state: RootState): languageState => state.language);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(state.lang);
+    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(language.lang);
 
     const handleLanguageSelect = (lang: string) => {
-        dispatch({ type: CONSTANTS.CHANGE_LANGUAGE, payload: { lang } });
+        dispatch({ type: CONSTANTS.CHANGE_APP_LANGUAGE, payload: { lang } });
         setSelectedLanguage(lang);
     };
 
@@ -80,8 +80,8 @@ export function AppLanguageScreen() {
                                 activeOpacity={0.8}
                                 style={selectedLanguage === item.value ? styles.selectedGridItem : [styles.gridItem, { borderBottomColor: item.color }]}
                                 onPress={() => handleLanguageSelect(item.value)}>
-                                <Text style={[styles.languageTxt, { fontSize: 38, color: item.color }]}>{item.language}</Text>
-                                <Text style={[styles.nameTxt, { fontSize: 16 }]}>{item.name}</Text>
+                                <Text style={[styles.languageTxt, { fontSize: METRICS.fontScale(38), color: item.color }]}>{item.language}</Text>
+                                <Text style={styles.nameTxt}>{item.name}</Text>
                             </TouchableOpacity>
                         ))}
                     </View>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Platform, NativeModules } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Divider, RadioButton } from 'react-native-paper';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
@@ -7,7 +8,7 @@ import Modal from 'react-native-modal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button, Input } from '../../components';
-import { COLORS, FONTS } from '../../theme';
+import { COLORS, FONTS, METRICS } from '../../theme';
 import { BottomContainerProps } from '../templates/types';
 import { ROUTES } from '../../constants';
 import { shareImage } from '../../helpers';
@@ -22,6 +23,8 @@ export const BottomContainer = ({
     viewRef,
     data
 }: BottomContainerProps) => {
+    const { t } = useTranslation();
+
     const navigation = useNavigation<NavigationProp<any>>();
 
     const reportData = [
@@ -102,7 +105,7 @@ export const BottomContainer = ({
 
     // Render item for FlatList
     const renderModalItem = ({ item }: { item: Report }) => (
-        <RadioButton.Group onValueChange={() => handleReportChange(item.label)} value={selectedReport} >
+        <RadioButton.Group onValueChange={() => handleReportChange(item.label)} value={selectedReport}>
             <View style={styles.modalItem}>
                 <RadioButton value={item.label} color={COLORS.base} />
                 <Text style={styles.labelTxt}>{item.label}</Text>
@@ -115,10 +118,10 @@ export const BottomContainer = ({
         <View style={styles.modalContainer}>
             <View style={styles.reportContainer}>
                 <Text style={styles.reportTitle}>{'Report Mistake'}</Text>
-                <MaterialIcons name='close' size={24} color={COLORS.grey} onPress={handleReportModalClose} />
+                <MaterialIcons name='close' size={METRICS.icons.medium} color={COLORS.grey} onPress={handleReportModalClose} />
             </View>
             <Divider />
-            <View style={{ margin: 16 }}>
+            <View style={{ margin: METRICS.baseHorizontalSpace * 1.5 }}>
                 <FlatList
                     data={reportData}
                     renderItem={renderModalItem}
@@ -136,7 +139,7 @@ export const BottomContainer = ({
                     numberOfLines={4}
                 />
                 <Button
-                    buttonTitle="Report a mistake"
+                    buttonTitle={t('report_mistake')}
                     onButtonPress={() => { }}
                 />
             </View>
@@ -157,7 +160,7 @@ export const BottomContainer = ({
                 <View style={styles.AuthorWrapperContainer}>
                     <View style={styles.AuthorContainer}>
                         <View style={styles.iconContainer}>
-                            <MaterialIcons name='person-outline' size={24} color={COLORS.white} />
+                            <MaterialIcons name='person-outline' size={METRICS.icons.medium} color={COLORS.white} />
                         </View>
                         <View style={styles.AuthorInfoContainer}>
                             <Text style={styles.reporterTxt}>{'Reporter Name'}</Text>
@@ -165,42 +168,42 @@ export const BottomContainer = ({
                         </View>
                     </View>
                     <View style={styles.AuthorContainer}>
-                        <MaterialIcons name='schedule' size={16} />
+                        <MaterialIcons name='schedule' size={METRICS.icons.tiny} />
                         <Text style={styles.publishTimeTxt}>{'5:50 PM'}</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.divider} />
             <TapGestureHandler enabled={true}>
-                <View style={[styles.bottomContainer, { paddingHorizontal: 8 }]}>
+                <View style={[styles.bottomContainer, { paddingHorizontal: METRICS.halfHorizontalSpace }]}>
                     <View style={styles.AuthorWrapperContainer}>
                         <View style={styles.AuthorContainer}>
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbUp} activeOpacity={1}>
                                 {
                                     isSelectedThumbUp ?
-                                        <MaterialIcons name='thumb-up' size={24} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-up' size={METRICS.icons.medium} color={COLORS.grey} />
                                         :
-                                        <MaterialIcons name='thumb-up-off-alt' size={24} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-up-off-alt' size={METRICS.icons.medium} color={COLORS.grey} />
                                 }
                                 <Text style={styles.spaceIconTxt}>{totalLikes}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbDown} activeOpacity={1}>
                                 {
                                     isSelectedThumbDown ?
-                                        <MaterialIcons name='thumb-down' size={24} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-down' size={METRICS.icons.medium} color={COLORS.grey} />
                                         :
-                                        <MaterialIcons name='thumb-down-off-alt' size={24} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-down-off-alt' size={METRICS.icons.medium} color={COLORS.grey} />
                                 }
                                 <Text style={styles.spaceIconTxt}>{totalDislikes}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressComment} activeOpacity={1}>
-                                <MaterialCommunityIcons name='comment-processing-outline' size={24} color={COLORS.grey} />
+                                <MaterialCommunityIcons name='comment-processing-outline' size={METRICS.icons.medium} color={COLORS.grey} />
                                 <Text style={styles.spaceIconTxt}>{data.comment}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.AuthorContainer}>
-                            <MaterialCommunityIcons name='share' size={24} color={COLORS.base} style={styles.space} onPress={() => shareImage(viewRef)} />
-                            <MaterialIcons name='report-gmailerrorred' size={24} color={COLORS.grey} style={styles.space} onPress={onPressReport} />
+                            <MaterialCommunityIcons name='share' size={METRICS.icons.medium} color={COLORS.base} style={styles.space} onPress={() => shareImage(viewRef)} />
+                            <MaterialIcons name='report-gmailerrorred' size={METRICS.icons.medium} color={COLORS.grey} style={styles.space} onPress={onPressReport} />
                         </View>
                     </View>
                 </View>
@@ -210,7 +213,7 @@ export const BottomContainer = ({
 };
 
 const styles = StyleSheet.create({
-    bottomContainer: { flexDirection: 'row', padding: 16 },
+    bottomContainer: { flexDirection: 'row', padding: METRICS.baseVerticalSpace * 1.5 },
     modalView: {
         justifyContent: 'flex-end',
         margin: 0,
@@ -219,13 +222,13 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
     },
     reportContainer: {
-        padding: 16,
+        padding: METRICS.baseVerticalSpace * 1.5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     reportTitle: {
-        fontSize: 20,
+        fontSize: METRICS.fontScale(20),
         fontFamily: FONTS.interBold,
         color: COLORS.lightblack
     },
@@ -234,52 +237,52 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     labelTxt: {
-        fontSize: 14,
+        fontSize: METRICS.fontScale(14),
         fontFamily: FONTS.interRegular,
         color: COLORS.lightblack
     },
     inputStyle: {
-        marginVertical: 16
+        marginVertical: METRICS.baseVerticalSpace * 1.5
     },
     AuthorWrapperContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
     AuthorContainer: { flexDirection: 'row', alignItems: 'center' },
     space: {
-        marginHorizontal: 8
+        marginHorizontal: METRICS.halfHorizontalSpace
     },
     spaceIconTxt: {
-        marginLeft: 4,
+        marginLeft: METRICS.halfHorizontalSpace,
         color: COLORS.grey
     },
     iconContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 32,
-        width: 32,
-        borderRadius: 16,
+        height: METRICS.images.small,
+        width: METRICS.images.small,
+        borderRadius: METRICS.baseHorizontalSpace * 1.5,
         backgroundColor: COLORS.grey
     },
     AuthorInfoContainer: {
-        marginLeft: 4
+        marginLeft: METRICS.halfHorizontalSpace
     },
     reporterTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         fontFamily: FONTS.interBold,
         color: COLORS.grey
     },
     reporterLocation: {
-        fontSize: 8,
+        fontSize: METRICS.fontScale(8),
         fontFamily: FONTS.interRegular,
         color: COLORS.grey
     },
     publishTimeTxt: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         fontFamily: FONTS.interSemiBold,
         color: COLORS.grey,
-        marginLeft: 4
+        marginLeft: METRICS.halfHorizontalSpace
     },
     divider: {
-        height: 2,
-        width: '96%',
+        height: METRICS.hairlineWidth,
+        width: METRICS.windowWidth * 0.96,
         backgroundColor: COLORS.lightwhite,
         alignSelf: 'center'
     }

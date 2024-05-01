@@ -1,9 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { StyleSheet } from 'react-native';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
-const { height, width } = Dimensions.get('screen')
-
-const itemWidth = (width) / 4;
+const itemWidth = (METRICS.windowWidth) / 4;
 
 const styles = StyleSheet.create({
     modalView: {
@@ -15,17 +13,17 @@ const styles = StyleSheet.create({
     },
     modalItem: {
         width: itemWidth,
-        paddingVertical: 16,
+        paddingVertical: METRICS.baseVerticalSpace,
         alignItems: 'center'
     },
     categoryContainer: {
-        padding: 16,
+        padding: METRICS.baseVerticalSpace,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     categoryHeading: {
-        fontSize: 20,
+        fontSize: METRICS.fontScale(18),
         fontFamily: FONTS.interBold,
         color: COLORS.lightblack
     },
@@ -33,8 +31,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         position: 'absolute',
-        width: width,
-        paddingVertical: 8,
+        width: METRICS.windowWidth,
+        paddingVertical: METRICS.baseHorizontalSpace,
         zIndex: 1,
         backgroundColor: COLORS.white,
         borderBottomWidth: 1,
@@ -43,20 +41,20 @@ const styles = StyleSheet.create({
     tabBarItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 8,
+        padding: METRICS.halfVerticalSpace,
     },
     tabBarTxt: {
         color: COLORS.grey,
         fontFamily: FONTS.interBold,
     },
     categoryImg: {
-        height: 64,
-        width: 64,
-        borderRadius: 12,
+        height: METRICS.images.medium,
+        width: METRICS.images.medium,
+        borderRadius: METRICS.baseHorizontalSpace,
         backgroundColor: COLORS.lightwhite
     },
     categoryTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.grey,
         fontFamily: FONTS.interSemiBold,
     }

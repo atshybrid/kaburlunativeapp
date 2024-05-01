@@ -1,4 +1,4 @@
-export * from './Splash';
+export * from './Common';
 export * from './AddStaff';
 export * from './AddPost';
 export * from './Home';

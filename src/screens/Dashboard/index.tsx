@@ -3,7 +3,7 @@ import { View, StatusBar, Text, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import styles from './style/index.style';
 import { Button, Input } from '../../components';
 import { ROUTES } from '../../constants';
@@ -38,7 +38,7 @@ export function DashboardScreen({ route, navigation }: NavigationProps) {
                 <View style={styles.modalMainContainer}>
                     <Text style={styles.titleTxt}>{t('need_to_verify')}</Text>
                     <Text style={styles.subTitleTxt}>{t('identity_instruction')}</Text>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 16 }]}>{t('id_proof')}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.baseVerticalSpace * 1.5 }]}>{t('id_proof')}</Text>
                     <Input
                         placeholder="i.e Aadhar Number"
                         keyboardType='number-pad'
@@ -52,7 +52,7 @@ export function DashboardScreen({ route, navigation }: NavigationProps) {
                     <TouchableOpacity activeOpacity={0.8} onPress={() => { }}>
                         <Text style={styles.getOTPTxt}>{t('get_otp')}</Text>
                     </TouchableOpacity>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{t('verify_otp')}</Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{t('verify_otp')}</Text>
                     <Input
                         placeholder="i.e Enter OTP"
                         keyboardType='number-pad'
@@ -87,7 +87,7 @@ export function DashboardScreen({ route, navigation }: NavigationProps) {
             <View style={styles.profileContainer}>
                 <View style={styles.profileImgContainer}>
                     <TouchableOpacity activeOpacity={0.8} onPress={handleProfileOnPress}>
-                        <Icon name='person-circle' size={96} color={COLORS.grey} />
+                        <Icon name='person-circle' size={METRICS.images.large} color={COLORS.grey} />
                     </TouchableOpacity>
                     <View style={styles.txtContainer}>
                         <Text style={styles.nameTxt}>{'Nagendra Reddy'}</Text>
@@ -95,37 +95,37 @@ export function DashboardScreen({ route, navigation }: NavigationProps) {
                         <Text style={styles.subNameTxt}>{'Kamareddy'}</Text>
                     </View>
                 </View>
-                <Icon name='settings-outline' size={24} color={COLORS.grey} />
+                <Icon name='settings-outline' size={METRICS.icons.medium} color={COLORS.grey} />
             </View>
             <TouchableOpacity style={styles.articleTopContainer} activeOpacity={1} onPress={() => { navigation.navigate(ROUTES.ADD_POST); }}>
-                <Icon name='newspaper-outline' size={24} color={COLORS.sky} />
+                <Icon name='newspaper-outline' size={METRICS.icons.medium} color={COLORS.sky} />
                 <View style={{ flex: 1 }}>
                     <Text style={styles.articleTitle}>{t('post_articles')}</Text>
                     <Text style={styles.articleSubTitle}>{t('post_instruction')}</Text>
                 </View>
-                <Icon name='chevron-forward' size={24} color={COLORS.sky} />
+                <Icon name='chevron-forward' size={METRICS.icons.medium} color={COLORS.sky} />
             </TouchableOpacity>
             <View style={styles.articleBottomContainer}>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lightgreen }]}>
                     <View style={styles.articleItemContainer}>
-                        <Icon name='newspaper-outline' size={24} color={COLORS.green} />
+                        <Icon name='newspaper-outline' size={METRICS.icons.medium} color={COLORS.green} />
                         <Text style={[styles.totalArticle, { color: COLORS.green }]}>{'8'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{t('published')}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: METRICS.halfVerticalSpace }]}>{t('published')}</Text>
                 </View>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lightpurple }]}>
                     <View style={styles.articleItemContainer}>
-                        <Icon name='newspaper-outline' size={24} color={COLORS.purple} />
+                        <Icon name='newspaper-outline' size={METRICS.icons.medium} color={COLORS.purple} />
                         <Text style={[styles.totalArticle, { color: COLORS.purple }]}>{'10'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 4 }]}>{t('submitted')}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: METRICS.halfVerticalSpace }]}>{t('submitted')}</Text>
                 </View>
                 <View style={[styles.articleItem, { backgroundColor: COLORS.lighttomato }]}>
                     <View style={styles.articleItemContainer}>
-                        <Icon name='newspaper-outline' size={24} color={COLORS.tomato} />
+                        <Icon name='newspaper-outline' size={METRICS.icons.medium} color={COLORS.tomato} />
                         <Text style={[styles.totalArticle, { color: COLORS.tomato }]}>{'2'}</Text>
                     </View>
-                    <Text style={[styles.subNameTxt, { marginTop: 8 }]}>{t('rejected')}</Text>
+                    <Text style={[styles.subNameTxt, { marginTop: METRICS.halfVerticalSpace }]}>{t('rejected')}</Text>
                 </View>
             </View>
         </View>

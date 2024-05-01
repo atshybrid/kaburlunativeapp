@@ -1,23 +1,21 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
-
-const { height, width } = Dimensions.get('screen')
+import { StyleSheet } from 'react-native';
+import { COLORS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     bottomTabBarContainer: {
         flexDirection: 'row',
         position: 'absolute',
-        width: width,
+        width: METRICS.windowWidth,
         bottom: 0,
         zIndex: 1,
         backgroundColor: COLORS.white,
-        borderTopWidth: 1,
+        borderTopWidth: METRICS.hairlineWidth,
         borderTopColor: COLORS.lightwhite
     },
     bottomTabBarItem: {
         flex: 1,
         alignItems: 'center',
-        paddingVertical: 8
+        paddingVertical: METRICS.halfVerticalSpace
     }
 });
 

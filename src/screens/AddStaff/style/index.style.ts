@@ -1,48 +1,47 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16,
-        paddingVertical: 32
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        paddingVertical: METRICS.baseVerticalSpace * 2
     },
     inputContainer: {
         backgroundColor: COLORS.white,
-        padding: 16,
-        borderRadius: 8
+        padding: METRICS.baseVerticalSpace * 1.5,
+        borderRadius: METRICS.halfHorizontalSpace
     },
     inputTitleTxt: {
         color: COLORS.lightblack,
         fontFamily: FONTS.interMedium,
-        fontSize: 12,
-        marginLeft: 4,
-        marginBottom: 4,
+        fontSize: METRICS.fontScale(12),
+        marginLeft: METRICS.halfHorizontalSpace,
     },
     dateContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 40,
-        paddingHorizontal: 16,
+        height: METRICS.inputHeight,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
         borderColor: COLORS.lightwhite,
-        borderRadius: 12,
-        borderWidth: 2,
+        borderRadius: METRICS.baseHorizontalSpace,
+        borderWidth: METRICS.hairlineWidth,
     },
     dateTxt: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         fontFamily: FONTS.interMedium,
         color: COLORS.lightblack
     },
     dateInfoTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         fontFamily: FONTS.interMedium,
         color: COLORS.lightblack,
-        marginTop: 4,
-        marginLeft: 4
+        marginTop: METRICS.halfVerticalSpace,
+        marginLeft: METRICS.halfHorizontalSpace
     },
     textInput: {
-        height: 40
+        height: METRICS.inputHeight
     },
     required: {
         color: COLORS.red
@@ -51,27 +50,27 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 16,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
+        marginTop: METRICS.baseVerticalSpace * 1.5,
+        paddingVertical: METRICS.baseVerticalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
         backgroundColor: COLORS.white,
-        borderRadius: 8
+        borderRadius: METRICS.halfHorizontalSpace
     },
     switchOutter: {
         flexDirection: 'row',
-        width: 40,
-        height: 20,
+        width: METRICS.switchWidth,
+        height: METRICS.switchHeight,
         backgroundColor: COLORS.lightwhite,
         borderRadius: 12,
     },
     switchInner: {
-        width: 24,
-        height: 20,
+        width: METRICS.baseHorizontalSpace * 2,
+        height: METRICS.switchHeight,
         backgroundColor: COLORS.lightblack,
-        borderRadius: 12,
+        borderRadius: METRICS.baseHorizontalSpace,
     },
     btnContainer: {
-        marginTop: 16,
+        marginTop: METRICS.baseVerticalSpace * 2,
         backgroundColor: COLORS.white,
         borderWidth: 1,
         borderColor: COLORS.base,

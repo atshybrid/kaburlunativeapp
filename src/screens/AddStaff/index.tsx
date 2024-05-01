@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import { Button, Dropdown, Input } from '../../components';
 import styles from './style/index.style';
 import { inputValidation } from '../../helpers';
@@ -101,7 +101,7 @@ export function AddStaffScreen() {
                     />
                 )}
                 <View style={styles.inputContainer}>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('name')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('name')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e Shiva"
                         onChangeText={text => {
@@ -113,7 +113,7 @@ export function AddStaffScreen() {
                         errorMessage={t('valid_name')}
                         valid={inputValidation.name(name)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('email')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('email')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e  shiva@gmail.com"
                         keyboardType='email-address'
@@ -125,7 +125,7 @@ export function AddStaffScreen() {
                         errorMessage={t('valid_email')}
                         valid={inputValidation.email(email)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('mobile_number')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('mobile_number')} `}<Text style={styles.required}>*</Text></Text>
                     <Input
                         placeholder="I.e 919999999999"
                         keyboardType='phone-pad'
@@ -138,7 +138,7 @@ export function AddStaffScreen() {
                         errorMessage={t('valid_number')}
                         valid={inputValidation.phone(number)}
                     />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('hire_date')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('hire_date')} `}<Text style={styles.required}>*</Text></Text>
                     <TouchableOpacity
                         activeOpacity={1}
                         style={styles.dateContainer}
@@ -147,13 +147,13 @@ export function AddStaffScreen() {
                         <Icon name='calendar-month' size={16} color={COLORS.base} />
                     </TouchableOpacity>
                     <Text style={styles.dateInfoTxt}>{`${t('hire_instruction')}.`}</Text>
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_reporter_type')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('select_reporter_type')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="Report" data={options} onSelect={handleSelectReporterType} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_work_area')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('select_work_area')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e 503101" data={options} onSelect={handleSelectWorkArea} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_parent_reporter')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('select_parent_reporter')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e Bhiknoor" data={options} onSelect={handleSelectParentReporter} />
-                    <Text style={[styles.inputTitleTxt, { marginTop: 8 }]}>{`${t('select_subscription_plan')} `}<Text style={styles.required}>*</Text></Text>
+                    <Text style={[styles.inputTitleTxt, { marginTop: METRICS.halfVerticalSpace }]}>{`${t('select_subscription_plan')} `}<Text style={styles.required}>*</Text></Text>
                     <Dropdown label="I.e 1000 Rs Pay" data={options} onSelect={handleSelectSubscriptionPlan} />
                 </View>
                 <View style={styles.switchContainer}>

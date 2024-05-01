@@ -1,15 +1,13 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { StyleSheet } from 'react-native';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
-const { height, width } = Dimensions.get('screen')
-
-const itemWidth = (width) / 4;
+const itemWidth = (METRICS.windowWidth) / 4;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16,
-        paddingVertical: 32
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        paddingVertical: METRICS.baseVerticalSpace * 2
     },
     modalView: {
         justifyContent: 'flex-end',
@@ -20,82 +18,83 @@ const styles = StyleSheet.create({
     },
     modalItem: {
         width: itemWidth,
-        paddingVertical: 16,
+        paddingVertical: METRICS.baseVerticalSpace,
         alignItems: 'center'
     },
     categoryContainer: {
-        padding: 16,
+        padding: METRICS.baseVerticalSpace,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     inputContainer: {
         backgroundColor: COLORS.white,
-        borderRadius: 8
+        borderRadius: METRICS.halfHorizontalSpace
     },
     topInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        paddingTop: 8
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        paddingTop: METRICS.halfVerticalSpace
     },
     titleTxt: {
         color: COLORS.lightblack,
         fontFamily: FONTS.interRegular,
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         opacity: 0.5
     },
     divider: {
-        marginVertical: 8
+        marginVertical: METRICS.halfVerticalSpace
     },
     inputStyle: {
+        textAlignVertical: 'top',
         borderColor: undefined,
         borderRadius: 0,
         borderWidth: 0,
+        marginBottom: METRICS.halfVerticalSpace
     },
     inputTitleTxt: {
         color: COLORS.lightblack,
         fontFamily: FONTS.interMedium,
-        fontSize: 12,
-        marginLeft: 4,
-        marginBottom: 4,
+        fontSize: METRICS.fontScale(12),
+        marginLeft: METRICS.halfHorizontalSpace,
     },
     categoryTitle: {
         color: COLORS.lightblack,
         fontFamily: FONTS.interMedium,
-        marginTop: 24,
-        marginBottom: 8,
-        marginLeft: 4
+        marginTop: METRICS.baseVerticalSpace * 1.5,
+        marginBottom: METRICS.halfVerticalSpace,
+        marginLeft: METRICS.halfHorizontalSpace
     },
     categoryHeading: {
-        fontSize: 20,
+        fontSize: METRICS.fontScale(18),
         fontFamily: FONTS.interBold,
         color: COLORS.lightblack
     },
     categoryImg: {
-        height: 64,
-        width: 64,
-        borderRadius: 12,
+        height: METRICS.images.medium,
+        width: METRICS.images.medium,
+        borderRadius: METRICS.baseHorizontalSpace,
         backgroundColor: COLORS.lightwhite
     },
     categoryTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         color: COLORS.grey,
         fontFamily: FONTS.interSemiBold,
     },
     selectedCategoryTxt: {
         color: COLORS.base,
         fontFamily: FONTS.interMedium,
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
     },
     switchContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 16,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
+        marginBottom: METRICS.baseVerticalSpace * 1.5,
+        paddingVertical: METRICS.baseVerticalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
         backgroundColor: COLORS.white,
         borderRadius: 8
     },
@@ -106,8 +105,8 @@ const styles = StyleSheet.create({
     languageSwitchOutter: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: 40,
-        height: 18,
+        width: METRICS.switchWidth,
+        height: METRICS.switchHeight,
         backgroundColor: COLORS.grey,
         borderRadius: 12,
         marginLeft: 8
@@ -115,30 +114,30 @@ const styles = StyleSheet.create({
     languageSwitchInner: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 24,
-        height: 24,
+        width: METRICS.baseHorizontalSpace * 2,
+        height: METRICS.baseHorizontalSpace * 2,
         backgroundColor: COLORS.base,
-        borderRadius: 16,
+        borderRadius: METRICS.baseHorizontalSpace,
     },
     langTxt: {
-        fontSize: 10,
+        fontSize: METRICS.fontScale(10),
         fontFamily: FONTS.interSemiBold,
         color: COLORS.white,
     },
     switchOutter: {
         flexDirection: 'row',
-        width: 40,
-        height: 20,
+        width: METRICS.switchWidth,
+        height: METRICS.switchHeight,
         backgroundColor: COLORS.lightwhite,
-        borderRadius: 12,
+        borderRadius: METRICS.baseHorizontalSpace,
     },
     switchInner: {
-        width: 24,
-        height: 20,
-        borderRadius: 12,
+        width: METRICS.baseHorizontalSpace * 2,
+        height: METRICS.switchHeight,
+        borderRadius: METRICS.baseHorizontalSpace,
     },
     btnContainer: {
-        marginTop: 16,
+        marginTop: METRICS.baseVerticalSpace,
         backgroundColor: COLORS.white,
         borderWidth: 1,
         borderColor: COLORS.base,

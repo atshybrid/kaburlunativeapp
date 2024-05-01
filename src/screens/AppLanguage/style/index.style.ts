@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
     wrapperContainer: {
         flex: 1,
         justifyContent: 'center',
-        paddingHorizontal: 8,
+        paddingHorizontal: METRICS.baseHorizontalSpace,
     },
     headerContainer: {
-        paddingVertical: 20,
+        paddingVertical: METRICS.baseVerticalSpace * 1.5,
         backgroundColor: COLORS.white,
         elevation: 5
     },
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly',
         backgroundColor: COLORS.white,
-        borderBottomWidth: 3,
-        margin: 8,
-        paddingHorizontal: 16,
-        paddingVertical: 8
+        borderBottomWidth: METRICS.hairlineWidth,
+        margin: METRICS.halfVerticalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        paddingVertical: METRICS.halfVerticalSpace
     },
     selectedItem: {
         flexDirection: 'row',
@@ -39,42 +39,42 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         backgroundColor: COLORS.white,
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: METRICS.halfHorizontalSpace,
         borderColor: COLORS.blue,
-        margin: 8,
-        paddingHorizontal: 16,
-        paddingVertical: 8,
+        margin: METRICS.halfVerticalSpace,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        paddingVertical: METRICS.halfVerticalSpace,
     },
     gridItem: {
         flex: 1,
-        paddingVertical: 8,
+        paddingVertical: METRICS.halfVerticalSpace,
         backgroundColor: COLORS.white,
-        borderBottomWidth: 3,
-        marginHorizontal: 8,
+        borderBottomWidth: METRICS.hairlineWidth,
+        marginHorizontal: METRICS.halfHorizontalSpace,
     },
     selectedGridItem: {
         flex: 1,
-        paddingVertical: 8,
+        paddingVertical: METRICS.halfVerticalSpace,
         backgroundColor: COLORS.white,
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: METRICS.halfHorizontalSpace,
         borderColor: COLORS.blue,
-        marginHorizontal: 8,
+        marginHorizontal: METRICS.halfHorizontalSpace,
     },
     languageTxt: {
-        fontSize: 48,
+        fontSize: METRICS.fontScale(48),
         textAlign: 'center',
         fontFamily: FONTS.interRegular
     },
     nameTxt: {
-        fontSize: 20,
+        fontSize: METRICS.fontScale(16),
         textAlign: 'center',
         color: COLORS.grey,
-        marginTop: 4,
+        marginTop: METRICS.halfVerticalSpace,
         fontFamily: FONTS.interRegular
     },
     languageRow: {
-        marginBottom: 10,
+        marginBottom: METRICS.halfVerticalSpace,
     },
     grid: {
         flexDirection: 'row',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginVertical: 8,
+        marginVertical: METRICS.halfVerticalSpace,
     },
 });
 

@@ -1,7 +1,5 @@
-import { StatusBar, StyleSheet, Dimensions } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
-
-const { height, width } = Dimensions.get('screen')
+import { StyleSheet } from 'react-native';
+import { COLORS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
@@ -9,9 +7,9 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white
     },
     swipeCard: {
-        // position: "absolute",
-        width: width,
-        height: height - StatusBar.currentHeight,
+        position: "absolute",
+        width: METRICS.windowWidth,
+        height: METRICS.windowHeight,
         backgroundColor: COLORS.white
     }
 });

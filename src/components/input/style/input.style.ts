@@ -1,19 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     textInputStyle: {
-        paddingLeft: 16,
+        paddingVertical: 0,
+        textAlignVertical: 'center',
+        paddingLeft: METRICS.baseHorizontalSpace * 1.5,
         borderColor: COLORS.lightwhite,
-        borderRadius: 12,
-        borderWidth: 2,
+        borderRadius: METRICS.baseHorizontalSpace,
+        borderWidth: METRICS.hairlineWidth,
         color: COLORS.lightblack
     },
     error: {
         color: COLORS.red,
         fontFamily: FONTS.interMedium,
-        fontSize: 10,
-        lineHeight: 12,
+        fontSize: METRICS.fontScale(12)
     },
 });
 

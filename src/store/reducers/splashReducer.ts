@@ -1,14 +1,14 @@
 import { CONSTANTS } from "../../constants";
 
-export interface splashStateIF {
+export interface splashState {
     isActiveSplash: boolean;
 }
 
-const initialState: splashStateIF = {
+const initialState: splashState = {
     isActiveSplash: true,
 };
 
-const splashReducer = (state = initialState, action: any) => {
+export const splashReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case CONSTANTS.SPLASH_SCREEN:
             return { ...state, isActiveSplash: false };
@@ -17,5 +17,3 @@ const splashReducer = (state = initialState, action: any) => {
             return state;
     }
 };
-
-export default splashReducer;

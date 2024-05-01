@@ -1,48 +1,35 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
-
-const { width, height } = Dimensions.get("screen");
+import { StyleSheet } from 'react-native';
+import { COLORS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    buttonRow: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    buttonContainer: {
-        width: width * 0.125,
-        alignItems: "center",
-    },
-    flatList: {
-        flex: 1,
-    },
     slide: {
         flex: 1,
-        width: width,
+        width: METRICS.windowWidth,
         justifyContent: "center",
         alignItems: "center",
     },
     imgView: {
-        width: width,
-        height: height
+        width: METRICS.windowWidth,
+        height: METRICS.windowHeight
     },
     paginationContainer: {
         position: 'absolute',
-        bottom: height * 0.15,
+        bottom: METRICS.windowHeight * 0.15,
         alignSelf: 'center',
         zIndex: 1,
         backgroundColor: COLORS.lightblack,
-        padding: 2,
-        borderRadius: 8,
+        padding: METRICS.halfVerticalSpace / 2,
+        borderRadius: METRICS.halfHorizontalSpace,
         flexDirection: "row",
     },
     dot: {
-        width: 6,
-        height: 6,
-        borderRadius: 3,
-        marginHorizontal: 4,
+        width: METRICS.halfHorizontalSpace,
+        height: METRICS.halfHorizontalSpace,
+        borderRadius: METRICS.halfHorizontalSpace / 2,
+        marginHorizontal: METRICS.halfHorizontalSpace / 2,
     }
 });
 

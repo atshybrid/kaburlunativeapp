@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { PermissionsAndroid } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native';
-import messaging from "@react-native-firebase/messaging";
 import {
     SplashScreen,
     HomeScreen,
@@ -18,87 +16,35 @@ import {
     AddPostScreen,
     DashboardScreen,
     AppLanguageScreen,
-    ContentLanguageScreen
+    ContentLanguageScreen,
+    ConnectionScreen
 } from '../screens';
 import { navigationRef } from '../navigators';
 import { ROUTES } from '../constants';
 import { RootState } from '../store';
-import { splashStateIF } from '../store/reducers/splashReducer';
+import { splashState } from '../store/reducers/splashReducer';
+import { connectionState } from '../store/reducers/connectionReducer';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
-    const dispatch = useDispatch();
-    const loading = useSelector(
-        (state: RootState): splashStateIF => state.splash,
+    const connection = useSelector(
+        (state: RootState): connectionState => state.connection,
     );
-
-    const requestUserPermission = async (): Promise<boolean> => {
-        try {
-            const authStatus = await messaging().requestPermission();
-
-            await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-            );
-
-            const enabled =
-                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-                authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-            return enabled;
-        } catch (error) {
-            return false;
-        }
-    };
-
-    useEffect(() => {
-        const initializeMessaging = async () => {
-            if (await requestUserPermission()) {
-                messaging()
-                    .getToken()
-                    .then(token => {
-                        console.log('Token ==>', token);
-                    });
-            } else {
-                console.log('Failed token status');
-            }
-
-            // Check whether an initial notification is available
-            messaging()
-                .getInitialNotification()
-                .then(async remoteMessage => {
-                    if (remoteMessage) {
-                        console.log(
-                            'Notification caused app to open from quit state:',
-                            remoteMessage.notification,
-                        );
-                    }
-                });
-
-            // Assume a message-notification contains a "type" property in the data payload of the screen to open
-            messaging().onNotificationOpenedApp(async remoteMessage => {
-                console.log(
-                    'Notification caused app to open from background state:',
-                    remoteMessage.notification,
-                );
-            });
-
-            // Register background handler
-            messaging().setBackgroundMessageHandler(async remoteMessage => {
-                console.log('Message handled in the background!', remoteMessage);
-            });
-        };
-
-        initializeMessaging();
-    }, [])
-
+    const splash = useSelector(
+        (state: RootState): splashState => state.splash,
+    );
 
     const options = {
         headerShown: false,
     };
 
-    if (loading.isActiveSplash) {
+    if (splash.isActiveSplash) {
         return <SplashScreen />;
+    }
+
+    if (!splash.isActiveSplash && !connection.isConnected) {
+        return <ConnectionScreen />
     }
 
     return (

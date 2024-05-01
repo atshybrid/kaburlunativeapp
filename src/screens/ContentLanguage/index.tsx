@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StatusBar, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import styles from './style/index.style';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 
 interface Language {
     language: string;
@@ -71,8 +71,8 @@ export function ContentLanguageScreen() {
                                 activeOpacity={0.8}
                                 style={selectedLanguage === item.value ? styles.selectedGridItem : [styles.gridItem, { borderBottomColor: item.color }]}
                                 onPress={() => handleLanguageSelect(item.value)}>
-                                <Text style={[styles.languageTxt, { fontSize: 38, color: item.color }]}>{item.language}</Text>
-                                <Text style={[styles.nameTxt, { fontSize: 16 }]}>{item.name}</Text>
+                                <Text style={[styles.languageTxt, { fontSize: METRICS.fontScale(38), color: item.color }]}>{item.language}</Text>
+                                <Text style={styles.nameTxt}>{item.name}</Text>
                             </TouchableOpacity>
                         ))}
                     </View>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { COLORS, FONTS } from '../../theme';
-import { Divider } from 'react-native-paper';
+import { COLORS, FONTS, METRICS } from '../../theme';
 
 
 export const TopContainer = () => {
@@ -30,16 +28,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: COLORS.base,
-        paddingVertical: 4,
-        paddingHorizontal: 8
+        paddingVertical: METRICS.halfVerticalSpace,
+        paddingHorizontal: METRICS.halfHorizontalSpace
     },
     txtStyle: {
-        fontSize: 12,
+        fontSize: METRICS.fontScale(12),
         fontFamily: FONTS.interBold,
         color: COLORS.white
     },
     divider: {
-        width: 2,
+        width: METRICS.hairlineWidth,
         height: '80%',
         backgroundColor: COLORS.white
     }

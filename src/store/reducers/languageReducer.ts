@@ -2,17 +2,17 @@ import * as Localization from 'react-native-localize';
 import i18n from '../../i18n';
 import { CONSTANTS } from "../../constants";
 
-export interface languageStateIF {
+export interface languageState {
     lang: string
 }
 
-const initialState: languageStateIF = {
-    lang: Localization.getLocales()[0]?.languageCode,
+const initialState: languageState = {
+    lang: Localization.getLocales()[0]?.languageCode || 'en',
 };
 
-const splashReducer = (state = initialState, action: any) => {
+export const languageReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case CONSTANTS.CHANGE_LANGUAGE:
+        case CONSTANTS.CHANGE_APP_LANGUAGE:
             return changeLanguage(state, action);
 
         default:
@@ -20,7 +20,7 @@ const splashReducer = (state = initialState, action: any) => {
     }
 };
 
-function changeLanguage(state: languageStateIF, action: any) {
+function changeLanguage(state: languageState, action: any) {
     const { lang } = action.payload;
     i18n.changeLanguage(lang);
     return {
@@ -28,5 +28,3 @@ function changeLanguage(state: languageStateIF, action: any) {
         lang
     };
 }
-
-export default splashReducer;

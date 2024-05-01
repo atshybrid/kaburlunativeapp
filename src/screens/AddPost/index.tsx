@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import Voice from '@react-native-voice/voice';
-import { COLORS } from '../../theme';
+import { COLORS, METRICS } from '../../theme';
 import { Button, Input } from '../../components';
 import styles from './style/index.style';
 import { Divider } from 'react-native-paper';
@@ -162,7 +162,7 @@ export function AddPostScreen() {
             <View style={styles.modalContainer}>
                 <View style={styles.categoryContainer}>
                     <Text style={styles.categoryHeading}>{t('select_category')}</Text>
-                    <Icon name='close' size={24} color={COLORS.grey} onPress={handleCategoryModalClose} />
+                    <Icon name='close' size={METRICS.icons.medium} color={COLORS.grey} onPress={handleCategoryModalClose} />
                 </View>
                 <Divider />
                 <FlatList
@@ -181,7 +181,7 @@ export function AddPostScreen() {
         return (
             <Icon
                 name={inputType === selectedIcon ? 'record-rec' : 'microphone'}
-                size={inputType === selectedIcon ? 24 : 22} color={COLORS.grey}
+                size={METRICS.icons.medium} color={COLORS.grey}
                 onPress={() => {
                     if (inputType === selectedIcon) {
                         stopListening(inputType)

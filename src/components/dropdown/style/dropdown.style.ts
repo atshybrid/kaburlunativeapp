@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     button: {
@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         borderColor: COLORS.lightwhite,
-        paddingHorizontal: 16,
-        borderRadius: 12,
-        borderWidth: 2,
-        height: 40,
+        paddingHorizontal: METRICS.baseHorizontalSpace * 1.5,
+        borderRadius: METRICS.baseHorizontalSpace,
+        borderWidth: METRICS.hairlineWidth,
+        height: METRICS.btnHeight,
         zIndex: 1,
     },
     buttonText: {
@@ -19,19 +19,15 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.interMedium,
     },
     icon: {
-        marginRight: 10,
+        marginRight: METRICS.baseHorizontalSpace,
     },
     dropdown: {
         position: 'absolute',
         backgroundColor: COLORS.white,
         width: '100%',
-        shadowColor: COLORS.black,
-        shadowRadius: 4,
-        shadowOffset: { height: 4, width: 0 },
-        shadowOpacity: 0.5,
-        borderBottomLeftRadius: 12,
-        borderBottomRightRadius: 12,
-        borderWidth: 1,
+        borderBottomLeftRadius: METRICS.baseHorizontalSpace,
+        borderBottomRightRadius: METRICS.baseHorizontalSpace,
+        borderWidth: METRICS.hairlineWidth,
         borderTopWidth: 0,
         borderColor: COLORS.lightwhite
     },
@@ -41,8 +37,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     item: {
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        paddingHorizontal: METRICS.baseHorizontalSpace,
+        paddingVertical: METRICS.baseVerticalSpace,
     },
     labelTxt: {
         color: COLORS.lightblack,
