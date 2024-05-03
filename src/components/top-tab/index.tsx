@@ -103,7 +103,7 @@ export const TopTab = ({
     return (
         <>
             <Modal
-                testID={'modal'}
+                testID={'category-modal'}
                 isVisible={isCategoryModalVisible}
                 onBackdropPress={handleCategoryModalClose}
                 onBackButtonPress={handleCategoryModalClose}

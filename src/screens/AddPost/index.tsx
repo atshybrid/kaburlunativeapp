@@ -44,14 +44,28 @@ export function AddPostScreen() {
         }
     ]
 
-    const [language, setLanguage] = useState('te-IN');
+    const [languages, setLanguages] = useState<{
+        [key: string]: string;
+    }>({
+        title: 'en-US',
+        shortTitle: 'en-US',
+        longTitle: 'en-US'
+    });
     const [permissionGranted, setPermissionGranted] = useState(false);
 
     const [title, setTitle] = React.useState('');
     const [shortTitle, setShortTitle] = React.useState('');
     const [longTitle, setLongTitle] = React.useState('');
 
-    const [selectedLanguageSwitch, setSelectedLanguageSwitch] = React.useState<string | null>(null);
+    const [selectedLanguageSwitches, setSelectedLanguageSwitches] = useState<string[]>(() => {
+        const switches: string[] = [];
+        Object.entries(languages).forEach(([key, value]) => {
+            if (value === 'en-US') {
+                switches.push(key);
+            }
+        });
+        return switches;
+    });
     const [selectedIcon, setSelectedIcon] = React.useState<string | null>(null);
 
     const [isBreakingNewsOn, setIsBreakingNewsOn] = React.useState(false);
@@ -88,28 +102,28 @@ export function AddPostScreen() {
         }
     };
 
-    const startListening = async (inputType: string) => {
+    const startListening = async (type: string) => {
         if (!permissionGranted) {
             console.log("Permission not granted!");
             return;
         }
         try {
-            console.log("Language ==>", language);
-            await Voice.start(language);
+            console.log("Language ==>", languages[type]);
+            await Voice.start(languages[type]);
             Voice.onSpeechResults = onSpeechResults;
-            console.log("startListening ==>", inputType);
-            setSelectedIcon(inputType === selectedIcon ? null : inputType);
+            console.log("startListening ==>", type);
+            setSelectedIcon(type === selectedIcon ? null : type);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const stopListening = async (inputType: string) => {
+    const stopListening = async (type: string) => {
         try {
             await Voice.stop();
             Voice.removeAllListeners();
-            console.log("stopListening ==>", inputType);
-            setSelectedIcon(inputType === selectedIcon ? null : inputType);
+            console.log("stopListening ==>", type);
+            setSelectedIcon(type === selectedIcon ? null : type);
         } catch (error) {
             console.error(error);
         }
@@ -125,13 +139,20 @@ export function AddPostScreen() {
         }
     };
 
-    const onToggleLanguageSwitch = (inputType: string) => {
-        if (language === 'en-US') {
-            setLanguage('te-IN'); // Switch to Telugu
+    const onToggleLanguageSwitch = (type: string) => {
+        if (selectedLanguageSwitches.includes(type)) {
+            setSelectedLanguageSwitches(selectedLanguageSwitches.filter((switchType) => switchType !== type));
         } else {
-            setLanguage('en-US'); // Switch to English
+            setSelectedLanguageSwitches([...selectedLanguageSwitches, type]);
         }
-        setSelectedLanguageSwitch(inputType === selectedLanguageSwitch ? null : inputType);
+
+        const updatedLanguages = { ...languages };
+        if (updatedLanguages[type] === 'en-US') {
+            updatedLanguages[type] = 'te-IN'; // Switch to Telugu
+        } else {
+            updatedLanguages[type] = 'en-US'; // Switch to English
+        }
+        setLanguages(updatedLanguages);
     };
 
     const onToggleSwitch = () => setIsBreakingNewsOn(!isBreakingNewsOn);
@@ -177,37 +198,96 @@ export function AddPostScreen() {
         );
     };
 
-    const speechToTextIcon = (inputType: string) => {
+    const speechToTextIcon = (type: string) => {
         return (
             <Icon
-                name={inputType === selectedIcon ? 'record-rec' : 'microphone'}
+                name={type === selectedIcon ? 'record-rec' : 'microphone'}
                 size={METRICS.icons.medium} color={COLORS.grey}
                 onPress={() => {
-                    if (inputType === selectedIcon) {
-                        stopListening(inputType)
+                    if (type === selectedIcon) {
+                        stopListening(type)
                     } else {
-                        startListening(inputType)
+                        startListening(type)
                     }
                 }}
             />
         );
     }
 
-    const languageSwitch = (inputType: string) => {
+    const languageSwitch = (type: string) => {
+        const isActive = selectedLanguageSwitches.includes(type);
         return (
-            <View style={styles.languageContainer}>
-                {speechToTextIcon(inputType)}
+            <>
                 <TouchableOpacity
-                    style={[styles.languageSwitchOutter, { justifyContent: inputType === selectedLanguageSwitch ? 'flex-end' : 'flex-start' }]}
+                    style={[styles.languageSwitchOutter, { justifyContent: isActive ? 'flex-end' : 'flex-start' }]}
                     activeOpacity={1}
-                    onPress={() => onToggleLanguageSwitch(inputType)}>
-                    {inputType === selectedLanguageSwitch && (<Text style={styles.langTxt}>{'అ'}</Text>)}
+                    onPress={() => onToggleLanguageSwitch(type)}>
+                    {isActive && (<Text style={styles.langTxt}>{'అ'}</Text>)}
                     <View style={styles.languageSwitchInner}>
-
-                        <Text style={styles.langTxt}>{inputType === selectedLanguageSwitch ? 'Aa' : 'అ'}</Text>
+                        <Text style={styles.langTxt}>{isActive ? 'Aa' : 'అ'}</Text>
                     </View>
-                    {inputType !== selectedLanguageSwitch && (<Text style={styles.langTxt}>{'Aa'}</Text>)}
+                    {!isActive && (<Text style={styles.langTxt}>{'Aa'}</Text>)}
                 </TouchableOpacity>
+            </>
+        );
+    };
+
+    const multilineInputBox = (type: string) => {
+        let heading: string, placeholderText: string;
+        switch (type) {
+            case 'title':
+                heading = t('give_title');
+                placeholderText = `${t('headline')} (${t('80_chars')})`;
+                break;
+
+            case 'shortTitle':
+                heading = t('write_short_news');
+                placeholderText = `${t('short_news')} (${t('400_chars')})`;
+                break;
+
+            case 'longTitle':
+                heading = t('write_long_news');
+                placeholderText = `${t('long_news')} (${t('1000_chars')})`;
+                break;
+
+            default:
+                heading = '';
+                placeholderText = '';
+                break;
+        }
+        return (
+            <View style={[styles.inputContainer, { marginTop: METRICS.baseVerticalSpace }]}>
+                <View style={styles.topInputContainer}>
+                    <Text style={styles.titleTxt}>{heading}</Text>
+                    <View style={styles.rightHeadingContainer}>
+                        {speechToTextIcon(type)}
+                        {languageSwitch(type)}
+                    </View>
+                </View>
+                <Divider style={styles.divider} />
+                <Input
+                    placeholder={placeholderText}
+                    onChangeText={text => {
+                        switch (type) {
+                            case 'title':
+                                setTitle(text);
+                                break;
+                            case 'shortTitle':
+                                setShortTitle(text);
+                                break;
+                            case 'longTitle':
+                                setLongTitle(text);
+                                break;
+                            default:
+                                break;
+                        }
+                    }}
+                    value={type === 'title' ? title : type === 'shortTitle' ? shortTitle : longTitle}
+                    containerStyle={styles.inputStyle}
+                    multiline={true}
+                    numberOfLines={type === 'title' ? 2 : type === 'shortTitle' ? 6 : 10}
+                    maxLength={type === 'title' ? 80 : type === 'shortTitle' ? 400 : 1000}
+                />
             </View>
         );
     };
@@ -217,67 +297,16 @@ export function AddPostScreen() {
             <View style={styles.container}>
                 <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
                 <Modal
-                    testID={'modal'}
+                    testID={'category-modal'}
                     isVisible={isCategoryModalVisible}
                     onBackdropPress={handleCategoryModalClose}
                     onBackButtonPress={handleCategoryModalClose}
                     style={styles.modalView}>
                     {renderCategoryModal()}
                 </Modal>
-                <View style={styles.inputContainer}>
-                    <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{t('give_title')}</Text>
-                        {languageSwitch('title')}
-                    </View>
-                    <Divider style={styles.divider} />
-                    <Input
-                        placeholder={`${t('headline')} (${t('80_chars')})`}
-                        onChangeText={text => {
-                            setTitle(text)
-                        }}
-                        value={title}
-                        containerStyle={styles.inputStyle}
-                        multiline={true}
-                        numberOfLines={2}
-                        maxLength={80}
-                    />
-                </View>
-                <View style={[styles.inputContainer, { marginTop: 16 }]}>
-                    <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{t('write_short_news')}</Text>
-                        {languageSwitch('shortTitle')}
-                    </View>
-                    <Divider style={styles.divider} />
-                    <Input
-                        placeholder={`${t('short_news')} (${t('400_chars')})`}
-                        onChangeText={text => {
-                            setShortTitle(text)
-                        }}
-                        value={shortTitle}
-                        containerStyle={styles.inputStyle}
-                        multiline={true}
-                        numberOfLines={6}
-                        maxLength={400}
-                    />
-                </View>
-                <View style={[styles.inputContainer, { marginTop: 16 }]}>
-                    <View style={styles.topInputContainer}>
-                        <Text style={styles.titleTxt}>{t('write_long_news')}</Text>
-                        {languageSwitch('longTitle')}
-                    </View>
-                    <Divider style={styles.divider} />
-                    <Input
-                        placeholder={`${t('long_news')} (${t('1000_chars')})`}
-                        onChangeText={text => {
-                            setLongTitle(text)
-                        }}
-                        value={longTitle}
-                        containerStyle={styles.inputStyle}
-                        multiline={true}
-                        numberOfLines={10}
-                        maxLength={1000}
-                    />
-                </View>
+                {multilineInputBox('title')}
+                {multilineInputBox('shortTitle')}
+                {multilineInputBox('longTitle')}
                 <Text style={styles.categoryTitle}>{t('categories')}</Text>
                 <View style={styles.switchContainer}>
                     <Text style={styles.inputTitleTxt}>{t('selected_category')}</Text>

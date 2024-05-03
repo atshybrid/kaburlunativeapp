@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './style/template.style';
-import { TopContainer, BottomContainer } from '../common';
+import { TopContainer, BottomContainer, ShareLabel } from '../common';
 import { TemplateProps } from './types';
 import { METRICS } from '../../theme';
 
@@ -9,6 +9,8 @@ export const FirstTemplate = ({
     data
 }: TemplateProps) => {
     const viewRef = useRef<View>(null);
+
+    const [isShowLabel, setShowLabel] = useState<boolean>(false);
     return (
         <>
             <TopContainer />
@@ -22,8 +24,9 @@ export const FirstTemplate = ({
                     <Text style={styles.shortDescTxt}>{data.shortdesc}</Text>
                 </View>
                 <Image source={data.img} style={[styles.imgStyle, { height: METRICS.windowHeight * 0.26 }]} resizeMode='stretch' />
+                {isShowLabel && (<ShareLabel />)}
             </View>
-            <BottomContainer viewRef={viewRef} data={data} />
+            <BottomContainer viewRef={viewRef} data={data} setShowLabel={setShowLabel} />
         </>
     );
 };

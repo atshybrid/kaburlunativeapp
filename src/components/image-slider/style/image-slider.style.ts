@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, METRICS } from '../../../theme';
+import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,8 +8,18 @@ const styles = StyleSheet.create({
     slide: {
         flex: 1,
         width: METRICS.windowWidth,
-        justifyContent: "center",
-        alignItems: "center",
+    },
+    watermarkTxt: {
+        position: 'absolute',
+        fontSize: METRICS.fontScale(48),
+        fontFamily: FONTS.interBold,
+        color: COLORS.lightwhite,
+        transform: [
+            { rotate: '270deg' },
+            { translateX: - METRICS.windowHeight / 2.5 },
+            { translateY: - METRICS.horizontalScale(72) }],
+        zIndex: 1,
+        opacity: 0.3,
     },
     imgView: {
         width: METRICS.windowWidth,

@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: 8
     },
-    languageContainer: {
+    rightHeadingContainer: {
         flexDirection: 'row',
         alignItems: 'center'
     },

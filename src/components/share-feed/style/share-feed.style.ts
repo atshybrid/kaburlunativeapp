@@ -2,8 +2,64 @@ import { StyleSheet } from 'react-native';
 import { COLORS, FONTS, METRICS } from '../../../theme';
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    modalView: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
+    reportModalContainer: {
+        backgroundColor: COLORS.white,
+    },
+    reportTopContainer: {
+        padding: METRICS.baseVerticalSpace * 1.5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    reportTitle: {
+        fontSize: METRICS.fontScale(20),
+        fontFamily: FONTS.interBold,
+        color: COLORS.lightblack
+    },
+    reportItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    reportlabelTxt: {
+        fontSize: METRICS.fontScale(14),
+        fontFamily: FONTS.interRegular,
+        color: COLORS.lightblack
+    },
+    inputStyle: {
+        paddingVertical: METRICS.halfVerticalSpace,
+        marginVertical: METRICS.baseVerticalSpace * 1.5,
+        textAlignVertical: 'top'
+    },
+    optionsModalContainer: {
+        padding: METRICS.baseVerticalSpace,
+        backgroundColor: COLORS.white,
+    },
+    closeiconContainer: {
+        alignSelf: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: METRICS.icons.medium,
+        height: METRICS.icons.medium,
+        backgroundColor: COLORS.lightwhite,
+        borderRadius: METRICS.icons.tiny
+    },
+    optionsItemWrapper: {
+        margin: METRICS.baseVerticalSpace
+    },
+    optionsItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: METRICS.baseVerticalSpace
+    },
+    optionsItemTxt: {
+        fontSize: METRICS.fontScale(12),
+        color: COLORS.black,
+        fontFamily: FONTS.interSemiBold,
+        marginLeft: METRICS.baseHorizontalSpace
     },
     bottomContainer: {
         flexDirection: 'row',

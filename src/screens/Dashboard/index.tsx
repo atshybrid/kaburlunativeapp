@@ -78,7 +78,7 @@ export function DashboardScreen({ route, navigation }: NavigationProps) {
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
             <Modal
-                testID={'modal'}
+                testID={'kyc-modal'}
                 isVisible={isKYCModalVisible}
                 onBackdropPress={handleKYCModalClose}
                 onBackButtonPress={handleKYCModalClose}>

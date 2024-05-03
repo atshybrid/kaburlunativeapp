@@ -8,6 +8,7 @@ type TemplateProps = {
 type BottomContainerProps = {
     viewRef: React.RefObject<View>,
     data: NewsItem;
+    setShowLabel: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 };
 
 type TopContainerProps = {

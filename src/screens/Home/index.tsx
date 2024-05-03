@@ -19,8 +19,6 @@ export function HomeScreen() {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log("Values ==>", isVisible, isModalVisible);
-
         if (!isModalVisible || !isVisible) {
             const timer = setTimeout(() => {
                 setIsVisible(false);

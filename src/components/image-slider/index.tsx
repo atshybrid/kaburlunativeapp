@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FlatList, View, Image } from 'react-native';
+import { FlatList, Text, View, Image } from 'react-native';
 import styles from './style/image-slider.style';
 import { COLORS, METRICS } from '../../theme';
 
@@ -23,6 +23,7 @@ export const ImageSlider = ({
     const renderItem = ({ item, index }: { item: SliderData, index: number }) => {
         return (
             <View style={styles.slide} key={index}>
+                <Text style={styles.watermarkTxt}>{"Kaburllu"}</Text>
                 <Image source={{ uri: item.img }} style={styles.imgView} resizeMode='stretch' />
             </View>
         );

@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import LottieView from 'lottie-react-native';
 import NetInfo from "@react-native-community/netinfo";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CONSTANTS } from '../../../constants';
 import { FONTS, COLORS, METRICS } from '../../../theme';
 import { Button } from '../../../components';
@@ -28,7 +28,7 @@ export function ConnectionScreen() {
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
             <View style={styles.infoContainer}>
-                <Icon name='wifi-off' size={METRICS.icons.xxl} color={COLORS.grey} style={styles.icon} />
+                <LottieView source={require('../../../assets/lottie/no_internet.json')} style={styles.icon} autoPlay loop />
                 <Text style={styles.noInternetTitle}>{'No Internet Connection'}</Text>
                 <Text style={styles.noInternetSubTitle}>{'Looks like your internet connection is interruted. Please check your network and retry'}</Text>
             </View>
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     icon: {
-        color: COLORS.lightred,
+        width: METRICS.icons.xxl,
+        height: METRICS.icons.xxl,
         alignSelf: 'center',
         marginBottom: METRICS.baseVerticalSpace
     },

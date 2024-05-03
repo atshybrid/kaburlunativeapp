@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import LottieView from 'lottie-react-native';
 import { Divider, RadioButton } from 'react-native-paper';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
@@ -21,7 +22,8 @@ interface Report {
 
 export const BottomContainer = ({
     viewRef,
-    data
+    data,
+    setShowLabel
 }: BottomContainerProps) => {
     const { t } = useTranslation();
 
@@ -106,17 +108,17 @@ export const BottomContainer = ({
     // Render item for FlatList
     const renderModalItem = ({ item }: { item: Report }) => (
         <RadioButton.Group onValueChange={() => handleReportChange(item.label)} value={selectedReport}>
-            <View style={styles.modalItem}>
+            <View style={styles.reportItem}>
                 <RadioButton value={item.label} color={COLORS.base} />
-                <Text style={styles.labelTxt}>{item.label}</Text>
+                <Text style={styles.reportlabelTxt}>{item.label}</Text>
             </View>
         </RadioButton.Group>
     );
 
     // Render item for FlatList
     const renderReportModal = () => (
-        <View style={styles.modalContainer}>
-            <View style={styles.reportContainer}>
+        <View style={styles.reportModalContainer}>
+            <View style={styles.reportTopContainer}>
                 <Text style={styles.reportTitle}>{'Report Mistake'}</Text>
                 <MaterialIcons name='close' size={METRICS.icons.medium} color={COLORS.grey} onPress={handleReportModalClose} />
             </View>
@@ -149,7 +151,7 @@ export const BottomContainer = ({
     return (
         <>
             <Modal
-                testID={'modal'}
+                testID={'report-modal'}
                 isVisible={isReportModalVisible}
                 onBackdropPress={handleReportModalClose}
                 onBackButtonPress={handleReportModalClose}
@@ -181,7 +183,7 @@ export const BottomContainer = ({
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbUp} activeOpacity={1}>
                                 {
                                     isSelectedThumbUp ?
-                                        <MaterialIcons name='thumb-up' size={METRICS.icons.medium} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-up' size={METRICS.icons.medium} color={COLORS.green} />
                                         :
                                         <MaterialIcons name='thumb-up-off-alt' size={METRICS.icons.medium} color={COLORS.grey} />
                                 }
@@ -190,19 +192,19 @@ export const BottomContainer = ({
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressThumbDown} activeOpacity={1}>
                                 {
                                     isSelectedThumbDown ?
-                                        <MaterialIcons name='thumb-down' size={METRICS.icons.medium} color={COLORS.grey} />
+                                        <MaterialIcons name='thumb-down' size={METRICS.icons.medium} color={COLORS.red} />
                                         :
                                         <MaterialIcons name='thumb-down-off-alt' size={METRICS.icons.medium} color={COLORS.grey} />
                                 }
                                 <Text style={styles.spaceIconTxt}>{totalDislikes}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.AuthorContainer, styles.space]} onPress={onPressComment} activeOpacity={1}>
-                                <MaterialCommunityIcons name='comment-processing-outline' size={METRICS.icons.medium} color={COLORS.grey} />
+                                <LottieView source={require('../../assets/lottie/comment.json')} style={styles.icon} autoPlay loop />
                                 <Text style={styles.spaceIconTxt}>{data.comment}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.AuthorContainer}>
-                            <MaterialCommunityIcons name='share' size={METRICS.icons.medium} color={COLORS.base} style={styles.space} onPress={() => shareImage(viewRef)} />
+                            <MaterialCommunityIcons name='share' size={METRICS.icons.medium} color={COLORS.base} style={styles.space} onPress={() => shareImage(viewRef, { setShowLabel })} />
                             <MaterialIcons name='report-gmailerrorred' size={METRICS.icons.medium} color={COLORS.grey} style={styles.space} onPress={onPressReport} />
                         </View>
                     </View>
@@ -218,10 +220,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         margin: 0,
     },
-    modalContainer: {
+    reportModalContainer: {
         backgroundColor: COLORS.white,
     },
-    reportContainer: {
+    reportTopContainer: {
         padding: METRICS.baseVerticalSpace * 1.5,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -232,20 +234,26 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.interBold,
         color: COLORS.lightblack
     },
-    modalItem: {
+    reportItem: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    labelTxt: {
+    reportlabelTxt: {
         fontSize: METRICS.fontScale(14),
         fontFamily: FONTS.interRegular,
         color: COLORS.lightblack
     },
     inputStyle: {
-        marginVertical: METRICS.baseVerticalSpace * 1.5
+        paddingVertical: METRICS.halfVerticalSpace,
+        marginVertical: METRICS.baseVerticalSpace * 1.5,
+        textAlignVertical: 'top'
     },
     AuthorWrapperContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
     AuthorContainer: { flexDirection: 'row', alignItems: 'center' },
+    icon: {
+        width: METRICS.icons.large,
+        height: METRICS.icons.large,
+    },
     space: {
         marginHorizontal: METRICS.halfHorizontalSpace
     },

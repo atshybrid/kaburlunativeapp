@@ -81,7 +81,7 @@ export function MobileLoginScreen({ route, navigation }: NavigationProps) {
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightwhite} />
             <Modal
-                testID={'modal'}
+                testID={'country-modal'}
                 isVisible={isCountryModalVisible}
                 onBackdropPress={handleContryModalClose}
                 onBackButtonPress={handleContryModalClose}
